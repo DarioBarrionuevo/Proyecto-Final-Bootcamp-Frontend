@@ -9,55 +9,77 @@
             <div class="login-space">
 
               <!-- Usuario -->
-              <div class="login">
-                <div class="group"><input id="user" type="text" class="input" placeholder="Pon aquí tu nombre"> </div>
-                <div class="group"> <input id="pass" type="text" class="input"
-                    placeholder="Pon aquí tu primer apellido"> </div>
-                <div class="group"><input id="pass" type="text" class="input"
-                    placeholder="Pon aquí tu segundo apellido">
-                </div>
-                <div class="group"><input id="pass" type="email" class="input" placeholder="Pon aquí tu email"> </div>
-                <div class="group"> <input id="pass" type="tel" class="input" placeholder="Pon aquí tu telefono">
-                </div>
-                <div class="group"><input id="pass" type="text" class="input"
-                    placeholder="Pon aquí tu nombre de usuario">
-                </div>
-                <div class="group"><input id="pass" type="password" class="input" data-type="password"
-                    placeholder="Pon aquí tu contraseña">
-                </div>
-                <div class="group"><input id="pass" type="text" pattern="[0-9]{5}" class="input"
-                    placeholder="Pon aquí tu código postal">
-                </div>
+              <form novalidate [formGroup]="formUser" (ngSubmit)="addUserToBBDD()">
+                <div class="login">
+                  <div class="group"><input id="userName" name="name" type="text" class="form-control"
+                      placeholder="Pon aquí tu nombre" formControlName="name">
+                  </div>
+                  <div class="group"> <input id="userSurname1" name="surname1" type="text" class="form-control"
+                      placeholder="Pon aquí tu primer apellido" formControlName="surname1"> </div>
+                  <div class="group"><input id="userSurname2" name="surname2" type="text" class="form-control"
+                      placeholder="Pon aquí tu segundo apellido" formControlName="surname2">
+                  </div>
+                  <div class="group"><input id="userMail" name="email" type="email" class="form-control"
+                      placeholder="Pon aquí tu email" formControlName="email">
+                  </div>
+                  <div class="group"> <input id="userPhone" name="phone_number" type="tel" class="form-control"
+                      placeholder="Pon aquí tu telefono" formControlName="phone_number">
+                  </div>
+                  <div class="group"><input id="userUserName" name="user_name" type="text" class="form-control"
+                      placeholder="Pon aquí tu nombre de usuario" formControlName="user_name">
+                  </div>
+                  <div class="group"><input id="userPass" name="password" type="password" class="form-control"
+                      data-type="password" placeholder="Pon aquí tu contraseña" formControlName="password">
+                  </div>
+                  <div class="group"><input id="userZipCode" name="zip_code" type="text" pattern="[0-9]{5}"
+                      class="form-control" placeholder="Pon aquí tu código postal" formControlName="zip_code">
+                  </div>
 
-                <div class="group"> <input type="submit" class="button" value="Registrate" [routerLink]="['/login']">
-                </div>
+                  <div class="group"> <input type="submit" class="button" value="Registrate">
+                  </div>
+                  <div class="group"> <input type="submit" class="button2 btn-danger" value="Ir a login"
+                      [routerLink]="['/login']">
+                  </div>
 
-              </div>
+                </div>
+              </form>
 
               <!--Organization -->
-              <div class="sign-up-form">
-                <div class="group"><input id="user" type="text" class="input" placeholder="Pon aquí el nombre"> </div>
-                <div class="group"> <input id="pass" type="text" class="input" placeholder="Pon aquí la dirección">
-                </div>
-                <div class="group"><input id="pass" type="text" class="input" placeholder="Pon aquí el NIF">
-                </div>
-                <div class="group"><input id="pass" type="email" class="input" placeholder="Pon aquí el email">
-                </div>
-                <div class="group"> <input id="pass" type="tel" class="input" placeholder="Pon aquí el telefono">
-                </div>
-                <div class="group"><input id="pass" type="text" class="input"
-                    placeholder="Pon aquí el nombre de usuario">
-                </div>
-                <div class="group"><input id="pass" type="password" class="input" data-type="password"
-                    placeholder="Pon aquí la contraseña">
-                </div>
-                <div class="group"><input id="pass" type="text" class="input"
-                    placeholder="Pon aquí los puntos de recogida">
-                </div>
-                <div class="group"> <input type="submit" class="button" value="Registrate" [routerLink]="['/login']">
-                </div>
+              <form novalidate [formGroup]="formOrg" (ngSubmit)="addOrganizationToBBDD()">
+                <div class="sign-up-form">
+                  <div class="group"><input id="orgName" name="name" type="text" class="form-control"
+                      placeholder="Pon aquí el nombre" formControlName="name">
+                  </div>
+                  <div class="group"> <input id="orgAddress" name="address" type="text" class="form-control"
+                      placeholder="Pon aquí la dirección" formControlName="address">
+                  </div>
+                  <div class="group"><input id="orgNIF" name="nif" type="text" class="form-control"
+                      placeholder="Pon aquí el NIF" formControlName="nif">
+                  </div>
+                  <div class="group"><input id="orgMail" name="email" type="email" class="form-control"
+                      placeholder="Pon aquí el email" formControlName="email">
+                  </div>
+                  <div class="group"> <input id="orgPhone" name="phone_number" type="tel" class="form-control"
+                      placeholder="Pon aquí el telefono" formControlName="phone_number">
+                  </div>
+                  <div class="group"><input id="OrgUserName" name="user_name" type="text" class="form-control"
+                      placeholder="Pon aquí el nombre de usuario" formControlName="user_name">
+                  </div>
+                  <div class="group"><input id="orgPass" name="password" type="password" class="form-control"
+                      data-type="password" placeholder="Pon aquí la contraseña" formControlName="password">
+                  </div>
+                  <div class="group"><input id="orgDeliveryPoints" name="delivery_points" type="text"
+                      class="form-control" placeholder="Pon aquí los puntos de recogida"
+                      formControlName="delivery_points">
+                  </div>
+                  <div class="group"> <input type="submit" class="button" value="Registrate">
+                  </div>
+                  <div class="group"> <input type="submit" class="button2 btn-danger" value="Ir a login"
+                      [routerLink]="['/login']">
+                  </div>
 
-              </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
