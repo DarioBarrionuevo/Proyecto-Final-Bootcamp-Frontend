@@ -1,6 +1,8 @@
 import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PeticionesBackendService } from '../services/peticiones-backend.service';
 
 @Component({
   selector: 'app-forms',
@@ -10,7 +12,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class FormsComponent implements OnInit {
   formUser: FormGroup;
   formOrg: FormGroup;
-  constructor() {
+  constructor(
+    private router: Router,
+    private peticionesService: PeticionesBackendService
+  ) {
     this.formUser = new FormGroup({
       name: new FormControl(),
       surname1: new FormControl(),
@@ -39,53 +44,37 @@ export class FormsComponent implements OnInit {
   //   const userData = this.formUser.value;
   //   console.log('FormsComponent -> getUserData -> userData', userData);
   // }
-  getOrganizationData(): void {
-    const userData = this.formOrg.value;
-    console.log('FormsComponent -> getUserData -> userData', userData);
-  }
+  // getOrganizationData(): void {
+  //   const userData = this.formOrg.value;
+  //   console.log('FormsComponent -> getUserData -> userData', userData);
+  // }
 
-  async addUserToBBDD() {
+  async addUserToBBDD(): Promise<any> {
     try {
       const userData = this.formUser.value;
+      console.log('FormsComponent -> addUserToBBDD -> userData', userData);
 
-      fetch('http://localhost:3000/users/createUser', {
-        method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify(userData),
-        headers: {
-          'Content-Type': 'application/json', // Important!! is a exception,depends on the headers even when comes from form-urlencoded
-          // Accept: 'application/x-www-form-urlencoded',
-        },
-      })
-        .then((res) => res.json())
-        .then((json) => {
-          // console.log('RESPONSE', json);
-          this.formUser.reset();
-        });
+      const jsonCreateUser = this.peticionesService.createUser(userData);
+      console.log('User created');
+
+      this.formUser.reset();
     } catch (error) {
       console.log(error);
     }
+    this.router.navigate(['/userLogin']);
   }
-  async addOrganizationToBBDD() {
+  async addOrganizationToBBDD(): Promise<any> {
     try {
       const orgData = this.formOrg.value;
+      const jsonCreateOrganization = this.peticionesService.createOrganization(
+        orgData
+      );
+      console.log('Organization created');
 
-      fetch('http://localhost:3000/organizations/createOrganization', {
-        method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify(orgData),
-        headers: {
-          'Content-Type': 'application/json',
-          // Accept: 'application/x-www-form-urlencoded',
-        },
-      })
-        .then((res) => res.json())
-        .then((json) => {
-          // console.log('RESPONSE', json);
-          this.formOrg.reset();
-        });
+      this.formOrg.reset();
     } catch (error) {
       console.log(error);
     }
+    this.router.navigate(['/organizationLogin']);
   }
 }

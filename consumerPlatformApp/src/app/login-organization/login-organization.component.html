@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <form novalidate [formGroup]="formOrg" (ngSubmit)="organizationLogin()" class="box">
+          <h1>Login</h1>
+          <p class="text-muted">Pon tu nombre de organizacion y contraseña</p>
+          <div class="group">
+            <input type="text" name="user_name" placeholder="Nombre de organizacion" formControlName="user_name" />
+          </div>
+          <div class="group">
+            <input type="password" name="password" placeholder="Contraseña" formControlName="password" />
+          </div>
+          <a class="forgot text-muted" [routerLink]="['/forms']">Aún no estoy registrado</a>
+
+          <input type="submit" value="Login" />
+          <a class="forgot text-muted" [routerLink]="['/home']">Vuelve al principio</a>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
