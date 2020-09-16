@@ -25,10 +25,10 @@ export class LoginUserComponent implements OnInit {
   async userLogin(): Promise<any> {
     try {
       const userData = this.formUser.value;
-      // console.log('LoginOrganizationComponent -> ngOnInit -> userData', userData);
+      console.log('LoginUserComponent -> ngOnInit -> userData', userData);
       const jsonUserLogin = await this.peticionesService.userLogin(userData);
       console.log(
-        'LoginOrganizationComponent -> ngOnInit -> jsonUserLogin',
+        'LoginUserComponent -> ngOnInit -> jsonUserLogin',
         jsonUserLogin
       );
 

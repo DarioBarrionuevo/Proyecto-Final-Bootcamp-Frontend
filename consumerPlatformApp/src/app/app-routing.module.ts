@@ -17,17 +17,17 @@ const routes: Routes = [
   { path: 'organizationLogin', component: LoginOrganizationComponent },
   { path: 'forms', component: FormsComponent },
   {
-    path: 'userHome/:userId',
+    path: 'userHome/:id',
     component: UserHomeComponent,
     canActivate: [LoginGuard],
   },
   {
-    path: 'userCheckout/:userId',
+    path: 'userCheckout/:id',
     component: UserCheckoutComponent,
     canActivate: [LoginGuard],
   },
   {
-    path: 'orgHome/:organizationId',
+    path: 'orgHome/:id',
     component: OrganizationHomeComponent,
     canActivate: [LoginGuard],
   },

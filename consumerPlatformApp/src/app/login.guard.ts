@@ -17,7 +17,7 @@ export class LoginGuard implements CanActivate {
     // console.log('LoginGuard -> canActivate -> idStatus', idStatus);
     // console.log('LoginGuard -> canActivate -> idStatus', typeof idStatus);
 
-    const id = route.paramMap.get('organizationId');
+    const id = route.paramMap.get('id');
     // console.log('LoginGuard -> canActivate -> _id', id);
     // console.log('LoginGuard -> canActivate -> _id', typeof id);
 

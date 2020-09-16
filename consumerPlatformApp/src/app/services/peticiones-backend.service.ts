@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class PeticionesBackendService {
+  token = JSON.parse(sessionStorage.getItem('token'));
   constructor(private httpClient: HttpClient) {}
 
   createUser(pUserData): any {
@@ -65,6 +66,20 @@ export class PeticionesBackendService {
       .post<any>(
         'http://localhost:3000/users/login',
         JSON.stringify(pUserData),
+        httpHeaders
+      )
+      .toPromise();
+  }
+  getOneOrganizationData(pId): Promise<any> {
+    const httpHeaders = {
+      headers: {
+        'x-access-token': this.token,
+      },
+    };
+
+    return this.httpClient
+      .get<any>(
+        `http://localhost:3000/organizations/getOneOrganization/${pId}`,
         httpHeaders
       )
       .toPromise();
