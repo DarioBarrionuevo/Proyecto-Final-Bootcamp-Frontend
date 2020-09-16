@@ -8,39 +8,51 @@ import { PeticionesBackendService } from '../services/peticiones-backend.service
   styleUrls: ['./organization-home.component.css'],
 })
 export class OrganizationHomeComponent implements OnInit {
+  // Orders data
+  ordersData: any[];
+  deliveryPointsData: any[];
+  dtOptions: any;
+  // Sessionstorage data
   userName = JSON.parse(sessionStorage.getItem('user_name'));
   id = JSON.parse(sessionStorage.getItem('_id'));
-  name = '';
-  address = '';
-  nif = '';
-  email = '';
-  // tslint:disable-next-line: variable-name
-  phone_number = '';
-  // tslint:disable-next-line: variable-name
-  delivery_points = '';
+
+  // Organization data
+  organizationData: any;
+
   section: string;
 
   constructor(
     private router: Router,
     private peticionesService: PeticionesBackendService
   ) {
-    // this.section = 'orders';
+    this.ordersData = [];
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      lengthMenu: [5, 10, 25],
+      processing: true,
+    };
   }
 
   async ngOnInit(): Promise<any> {
     try {
+      // traer info de organizacion
       const jsonOrgData = await this.peticionesService.getOneOrganizationData(
         this.id
       );
-      const data = jsonOrgData.organizationInfo[0];
-      // const data = jsonOrgData;
-      // console.log('OrganizationHomeComponent -> ngOnInit -> data', data);
-      this.name = data.name;
-      this.address = data.address;
-      this.nif = data.nif;
-      this.email = data.email;
-      this.phone_number = data.phone_number;
-      this.delivery_points = data.delivery_points;
+      this.organizationData = jsonOrgData.organizationInfo[0];
+      this.deliveryPointsData = this.organizationData.delivery_points;
+      // console.log(
+      //   'OrganizationHomeComponent -> this.organizationData',
+      //   this.deliveryPointsData
+      // );
+
+      // Traer array de orders
+      const jsonOrdersDataByOrg = await this.peticionesService.getOrdersByOrganization(
+        this.id
+      );
+      this.ordersData = jsonOrdersDataByOrg.orderInfo;
+      // console.log('this.ordersData', this.ordersData);
     } catch (error) {
       console.log('OrganizationHomeComponent -> error', error);
     }

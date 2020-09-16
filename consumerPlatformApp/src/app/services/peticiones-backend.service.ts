@@ -84,4 +84,18 @@ export class PeticionesBackendService {
       )
       .toPromise();
   }
+  getOrdersByOrganization(pId): Promise<any> {
+    const httpHeaders = {
+      headers: {
+        'x-access-token': this.token,
+      },
+    };
+
+    return this.httpClient
+      .get<any>(
+        `http://localhost:3000/orders/getOrdersByOrganization/${pId}`,
+        httpHeaders
+      )
+      .toPromise();
+  }
 }

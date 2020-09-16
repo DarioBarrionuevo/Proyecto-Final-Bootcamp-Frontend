@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DataTablesModule } from 'angular-datatables';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +34,7 @@ import { LoginOrganizationComponent } from './login-organization/login-organizat
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    DataTablesModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
