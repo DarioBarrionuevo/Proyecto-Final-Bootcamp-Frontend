@@ -98,4 +98,37 @@ export class PeticionesBackendService {
       )
       .toPromise();
   }
+  addDeliveryPointToBBDD(pId, pDeliveryPoint): any {
+    fetch(`http://localhost:3000/organizations/addDeliveryPoint/${pId}`, {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(pDeliveryPoint),
+      headers: {
+        'Content-Type': 'application/json', // Important!! is a exception,depends on the headers even when comes from form-urlencoded
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        // console.log('RESPONSE', json);
+        return json;
+      });
+  }
+  deleteDeliveryPointFromBBDD(pId, pIndex): any {
+    console.log('deleteDeliveryPointFromBBDD -> pIndex', pIndex);
+    console.log('deleteDeliveryPointFromBBDD -> pId', pId);
+
+    fetch(`http://localhost:3000/organizations/deleteDeliveryPoint/${pId}`, {
+      method: 'DELETE',
+      mode: 'cors',
+      body: JSON.stringify({ index: pIndex }),
+      headers: {
+        'Content-Type': 'application/json', // Important!! is a exception,depends on the headers even when comes from form-urlencoded
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        // console.log('RESPONSE', json);
+        return json;
+      });
+  }
 }

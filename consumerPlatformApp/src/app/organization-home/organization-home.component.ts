@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PeticionesBackendService } from '../services/peticiones-backend.service';
 
 @Component({
@@ -8,8 +9,11 @@ import { PeticionesBackendService } from '../services/peticiones-backend.service
   styleUrls: ['./organization-home.component.css'],
 })
 export class OrganizationHomeComponent implements OnInit {
+  // Add delivery point
+  formDelivery: FormGroup;
   // Orders data
   ordersData: any[];
+  // Delivery points data
   deliveryPointsData: any[];
   dtOptions: any;
   // Sessionstorage data
@@ -19,6 +23,7 @@ export class OrganizationHomeComponent implements OnInit {
   // Organization data
   organizationData: any;
 
+  // ngIf
   section: string;
 
   constructor(
@@ -32,6 +37,10 @@ export class OrganizationHomeComponent implements OnInit {
       lengthMenu: [5, 10, 25],
       processing: true,
     };
+
+    this.formDelivery = new FormGroup({
+      delivery_points: new FormControl(),
+    });
   }
 
   async ngOnInit(): Promise<any> {
@@ -57,23 +66,6 @@ export class OrganizationHomeComponent implements OnInit {
       console.log('OrganizationHomeComponent -> error', error);
     }
   }
-  // async getOneOrganization(): Promise<any> {
-  //   try {
-  //     const jsonOrgData = await this.peticionesService.getOneOrganizationData(
-  //       this.id
-  //     );
-  //     console.log(jsonOrgData.organizationInfo[0]);
-  //     const data = jsonOrgData.organizationInfo[0];
-  //     const name = data.name;
-  //     const address = data.address;
-  //     const nif = data.nif;
-  //     const email = data.email;
-  //     const phone_number = data.phone_number;
-  //     const delivery_points = data.delivery_points;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
 
   closeSession(): void {
     this.router.navigate(['/home']);
@@ -81,5 +73,36 @@ export class OrganizationHomeComponent implements OnInit {
   }
   loadSection($event): void {
     this.section = $event.target.dataset.section;
+  }
+  async addDeliveryPoint(): Promise<any> {
+    try {
+      const deliveryData = this.formDelivery.value;
+      const jsonCreateOrganization = await this.peticionesService.addDeliveryPointToBBDD(
+        this.id,
+        deliveryData
+      );
+      console.log(
+        'OrganizationHomeComponent -> jsonCreateOrganization',
+        jsonCreateOrganization
+      );
+      console.log('OrganizationHomeComponent -> deliveryData', deliveryData);
+
+      this.formDelivery.reset();
+      // location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteDeliveryPoint(pIndex): Promise<any> {
+    try {
+      const jsonOrgData = await this.peticionesService.deleteDeliveryPointFromBBDD(
+        this.id,
+        pIndex
+      );
+      this.deliveryPointsData.splice(pIndex, 1);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

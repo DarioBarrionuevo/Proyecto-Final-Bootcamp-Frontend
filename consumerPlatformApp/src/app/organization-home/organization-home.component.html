@@ -1,7 +1,6 @@
 <div class="container grey borderXwidth col-8">
   <a data-section="orders" (click)="loadSection($event)">PEDIDOS</a>
-  <a data-section="deliveryPoints" (click)="loadSection($event)"
-    >PUNTOS DE ENTREGA
+  <a data-section="deliveryPoints" (click)="loadSection($event)">PUNTOS DE RECOGIDA
   </a>
   <a data-section="baskets" (click)="loadSection($event)">CESTAS</a>
 
@@ -21,11 +20,7 @@
 
 <!-- PEDIDOS -->
 <div class="container containerOrders col-11" *ngIf="section === 'orders'">
-  <table
-    class="table table-striped table-bordered table-sm row-border hover"
-    datatable
-    [dtOptions]="dtOptions"
-  >
+  <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions">
     <thead>
       <tr>
         <!-- cabeceras de lo q recibo -->
@@ -55,39 +50,42 @@
   </table>
 </div>
 <!-- PUNTOS DE ENTREGA  //TODOhacerlo con el maps -->
+
 <div class="container" *ngIf="section === 'deliveryPoints'">
-  <!-- <div class="card mb-3" *ngFor="let point of deliveryPointsData">
-    <img src="https://picsum.photos/400/200" class="card-img-top" />
-    <div class="card-body">
-      <h5 class="card-title">Direccion</h5>
-      <p class="card-text">
-        {{ point }}
-      </p>
+  <div class="container containerDeliveryPoints">
+    <h1>AÑADE UN PUNTO DE RECOGIDA</h1>
+
+    <form novalidate [formGroup]="formDelivery" (ngSubmit)="addDeliveryPoint()">
+      <div class="sign-up-form">
+
+        <div class="group"><input id="orgDeliveryPoints" name="delivery_points" type="text" class="form-control"
+            placeholder="Añade el punto de recogida" formControlName="delivery_points">
+        </div>
+        <div class="group mt-2"> <input type="submit" class="button" value="Añadir">
+        </div>
+
+
+      </div>
+    </form>
+
+
+
+
+
+  </div>
+
+  <div class="container">
+    <div class="card mb-3 grey" *ngFor="let point of deliveryPointsData;let index = index;">
+      <!-- <img src="../../assets/img/delivery.jpg" class="card-img-top" /> -->
+      <div class="card-body">
+        <h3 class="card-title">Direccion de entrega</h3>
+        <p class="card-text">
+          {{ point }}
+        </p>
+        <button class="btn btn-danger" (click)="deleteDeliveryPoint(index)">Eliminar dirección</button>
+      </div>
     </div>
-  </div> -->
-
-  <h3>My Google Maps Demo</h3>
-  <!--The div element for the map -->
-  <div id="map"></div>
-
-  <script>
-    // Initialize and add the map
-    function initMap() {
-      // The location of Uluru
-      var uluru = { lat: -25.344, lng: 131.036 };
-      // The map, centered at Uluru
-      var map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 4,
-        center: uluru,
-      });
-      // The marker, positioned at Uluru
-      var marker = new google.maps.Marker({ position: uluru, map: map });
-    }
-  </script>
-  <script
-    defer
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
-  ></script>
+  </div>
 </div>
 
 <!-- CREAR CESTAS  lista de las que hay y añadir-->
