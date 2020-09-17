@@ -96,34 +96,15 @@ export class PeticionesBackendService {
       .toPromise();
   }
   getAllOrganizations(): Promise<any> {
-    // const httpHeaders = {
-    //   headers: {
-    //     'x-access-token': this.token,
-    //   },
-    // };
-
     return this.httpClient
-      .get<any>(
-        `http://localhost:3000/organizations/getAllOrganizations`
-        // httpHeaders
-      )
+      .get<any>(`http://localhost:3000/organizations/getAllOrganizations`)
       .toPromise();
   }
   getAllUsers(): Promise<any> {
-    // const httpHeaders = {
-    //   headers: {
-    //     'x-access-token': this.token,
-    //   },
-    // };
-
     return this.httpClient
-      .get<any>(
-        `http://localhost:3000/users/getAllUsers`
-        // httpHeaders
-      )
+      .get<any>(`http://localhost:3000/users/getAllUsers`)
       .toPromise();
   }
-
   getOrdersByOrganization(pId): Promise<any> {
     const httpHeaders = {
       headers: {
@@ -134,6 +115,20 @@ export class PeticionesBackendService {
     return this.httpClient
       .get<any>(
         `http://localhost:3000/orders/getOrdersByOrganization/${pId}`,
+        httpHeaders
+      )
+      .toPromise();
+  }
+  getOrdersByUser(pId): Promise<any> {
+    const httpHeaders = {
+      headers: {
+        'x-access-token': this.token,
+      },
+    };
+
+    return this.httpClient
+      .get<any>(
+        `http://localhost:3000/orders/getOrdersByUser/${pId}`,
         httpHeaders
       )
       .toPromise();
@@ -170,5 +165,52 @@ export class PeticionesBackendService {
         // console.log('RESPONSE', json);
         return json;
       });
+  }
+  createBasket(pBasketData): any {
+    const httpHeaders = {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': this.token,
+      },
+    };
+
+    return this.httpClient
+      .post<any>(
+        'http://localhost:3000/baskets/createBasket',
+        JSON.stringify(pBasketData),
+        httpHeaders
+      )
+      .toPromise();
+
+    // fetch('http://localhost:3000/baskets/createBasket', {
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   body: JSON.stringify(pBasketData),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'x-access-token': this.token,
+    //     // Important!! is a exception,depends on the headers even when comes from form-urlencoded
+    //     // Accept: 'application/x-www-form-urlencoded',
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     // console.log('RESPONSE', json);
+    //     return json;
+    //   });
+  }
+  getBasketsByOrganization(pId): Promise<any> {
+    const httpHeaders = {
+      headers: {
+        'x-access-token': this.token,
+      },
+    };
+
+    return this.httpClient
+      .get<any>(
+        `http://localhost:3000/baskets/getBasketsByOrganization/${pId}`,
+        httpHeaders
+      )
+      .toPromise();
   }
 }

@@ -12,7 +12,7 @@ export class UserCheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.activateRoute.params.subscribe((params) => {
       console.log(params);
-      // parmas.id o params.org
+      // parmas.id o params.idorg
     });
   }
 }

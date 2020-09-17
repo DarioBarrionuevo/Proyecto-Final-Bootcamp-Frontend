@@ -90,6 +90,14 @@ div.borderXwidth a:hover:after {
   background-color: white;
 }
 
+.containerBaskets2 {
+  background-color: white;
+}
+
+.containerBaskets {
+  color: white;
+}
+
 img {
   width: 100%;
   height: 250px;
@@ -123,4 +131,11 @@ img {
 
 .button:hover {
   background: rgb(98, 192, 43)
+}
+
+/* estilos form añadir cesta */
+
+.group {
+  margin-top: 5px;
+  margin-bottom: 15px;
 }

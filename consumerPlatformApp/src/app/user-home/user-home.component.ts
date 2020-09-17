@@ -15,6 +15,10 @@ export class UserHomeComponent implements OnInit {
   jsonOrgData: any[];
   //  User data
   jsonUserData: any;
+  // Orders data
+  ordersData: any[];
+  // Table
+  dtOptions: any;
   // Sessionstorage data
   userName = JSON.parse(sessionStorage.getItem('user_name'));
   id = JSON.parse(sessionStorage.getItem('_id'));
@@ -22,12 +26,24 @@ export class UserHomeComponent implements OnInit {
   constructor(
     private router: Router,
     private peticionesService: PeticionesBackendService
-  ) {}
+  ) {
+    this.ordersData = [];
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true,
+      dom: 'Blfrtip',
+      buttons: ['copy', 'csv', 'excel', 'print'],
+      lengthMenu: [5, 10, 25],
+    };
+  }
 
   async ngOnInit(): Promise<any> {
     try {
-      // traer info de user
+      // traer info de todas las organizaciones para los delivery
       this.jsonOrgData = await this.peticionesService.getAllOrganizations();
+      // traer info de user
+
       const jsonUserDataFromBBDD = await this.peticionesService.getOneUser(
         this.id
       );
@@ -35,11 +51,12 @@ export class UserHomeComponent implements OnInit {
       // console.log('UserHomeComponent -> this.jsonUserData', this.jsonUserData);
 
       // Traer array de orders //TODO hacerlo con order by user para las tablas
-      // const jsonOrdersDataByOrg = await this.peticionesService.getOrdersByOrganization(
-      //   this.id
-      // );
-      // this.ordersData = jsonOrdersDataByOrg.orderInfo;
-      // console.log('this.ordersData', this.ordersData);
+      const jsonOrdersDataByUser = await this.peticionesService.getOrdersByUser(
+        this.id
+      );
+
+      this.ordersData = jsonOrdersDataByUser.orderInfo;
+      console.log('this.ordersData', this.ordersData);
     } catch (error) {
       console.log('OrganizationHomeComponent -> error', error);
     }

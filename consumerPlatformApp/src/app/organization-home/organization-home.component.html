@@ -18,12 +18,12 @@
   <h3>{{ organizationData?.delivery_points }}</h3>
 </div>
 
-<!-- PEDIDOS -->
+<!-- ORDERS -->
 <div class="container containerOrders col-11" *ngIf="section === 'orders'">
   <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions">
     <thead>
       <tr>
-        <!-- cabeceras de lo q recibo -->
+        <!-- HEADERS-->
         <th>NOMBRE</th>
         <th>APELLIDO</th>
         <th>EMAIL</th>
@@ -35,22 +35,22 @@
       </tr>
     </thead>
     <tbody>
-      <!-- recorro el array que me he traido -->
+      <!-- ARRAY -->
       <tr *ngFor="let order of ordersData">
         <td>{{ order?.user.name }}</td>
-        <td>{{ order.user.surname1 }}</td>
-        <td>{{ order.user.email }}</td>
-        <td>{{ order.user.phone_number }}</td>
-        <td>{{ order.order_date }}</td>
-        <td>{{ order.basket.format }}</td>
-        <td>{{ order.basket.content }}</td>
-        <td>{{ order.paid }}</td>
+        <td>{{ order?.user.surname1 }}</td>
+        <td>{{ order?.user.email }}</td>
+        <td>{{ order?.user.phone_number }}</td>
+        <td>{{ order?.order_date }}</td>
+        <td>{{ order?.basket.format }}</td>
+        <td>{{ order?.basket.content }}</td>
+        <td>{{ order?.paid }}</td>
       </tr>
     </tbody>
   </table>
 </div>
-<!-- PUNTOS DE ENTREGA  //TODOhacerlo con el maps -->
 
+<!-- PUNTOS DE ENTREGA  //TODOhacerlo con el maps -->
 <div class="container" *ngIf="section === 'deliveryPoints'">
 
   <!-- ADD -->
@@ -84,4 +84,65 @@
 </div>
 
 <!-- CREAR CESTAS  lista de las que hay y añadir-->
-<div class="container col-11" *ngIf="section === 'baskets'"></div>
+<div class="container col-11" *ngIf="section === 'baskets'">
+
+  <!-- ADD BASKET -->
+  <div class="container containerBaskets grey">
+    <h1>AÑADE UNA CESTA</h1>
+    <form novalidate [formGroup]="formBasket" (ngSubmit)="createBasket()">
+      <div class="sign-up-form">
+
+        <div class="group">
+          <label>Elige un formato de cesta</label>
+          <select name="format" class="form-control " formControlName="format">
+            <option value="Small">Pequeña</option>
+            <option value="Big">Grande</option>
+            <option value="Others">Otros</option>
+          </select>
+        </div>
+        <label>Introduce aquí todo el contenido de la cesta con las cantidades correspondientes</label>
+        <div class="group">
+          <textarea name="content" class="form-control" rows="3" formControlName="content"></textarea>
+        </div>
+        <div class="group">
+          <label>
+            Selecciona la cantidad de stock disponible
+            <input type="number" name="stock" min="1" max="100" formControlName="stock">
+          </label>
+        </div>
+        <div class="group mt-2"> <input type="submit" class="button" value="Añadir">
+        </div>
+
+      </div>
+    </form>
+  </div>
+  <!-- SHOW  DATATABLE-->
+  <div class="container containerBaskets2 col-11">
+    <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions">
+      <thead>
+        <tr>
+          <!-- HEADERS-->
+          <th>ACTIVA</th>
+          <th>FORMATO</th>
+          <th>CONTENIDO</th>
+          <th>FECHA DE CREACION</th>
+          <th>STOCK</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ARRAY -->
+        <tr *ngFor="let basket of basketsData">
+          <td>{{ basket?.active }}</td>
+          <td>{{ basket?.format }}</td>
+          <td>{{ basket?.content }}</td>
+          <td>{{ basket?.creation_date }}</td>
+          <td>{{ basket?.stock }}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

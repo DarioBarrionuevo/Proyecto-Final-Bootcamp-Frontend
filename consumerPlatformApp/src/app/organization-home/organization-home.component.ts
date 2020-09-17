@@ -9,12 +9,18 @@ import { PeticionesBackendService } from '../services/peticiones-backend.service
   styleUrls: ['./organization-home.component.css'],
 })
 export class OrganizationHomeComponent implements OnInit {
+  // Add basket
+  formBasket: FormGroup;
   // Add delivery point
   formDelivery: FormGroup;
   // Orders data
   ordersData: any[];
+  // baskets data
+  basketsData: any[];
+
   // Delivery points data
   deliveryPointsData: any[];
+  // Table
   dtOptions: any;
   // Sessionstorage data
   userName = JSON.parse(sessionStorage.getItem('user_name'));
@@ -31,17 +37,23 @@ export class OrganizationHomeComponent implements OnInit {
     private peticionesService: PeticionesBackendService
   ) {
     this.ordersData = [];
+    this.basketsData = [];
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
       lengthMenu: [5, 10, 25],
       processing: true,
-      dom: 'Bfrtip',
+      dom: 'Blfrtip',
       buttons: ['copy', 'csv', 'excel', 'print'],
     };
 
     this.formDelivery = new FormGroup({
       delivery_points: new FormControl(),
+    });
+    this.formBasket = new FormGroup({
+      format: new FormControl(),
+      content: new FormControl(),
+      stock: new FormControl(),
     });
   }
 
@@ -52,30 +64,26 @@ export class OrganizationHomeComponent implements OnInit {
         this.id
       );
       this.organizationData = jsonOrgData.organizationInfo[0];
+
       this.deliveryPointsData = this.organizationData.delivery_points;
-      // console.log(
-      //   'OrganizationHomeComponent -> this.organizationData',
-      //   this.deliveryPointsData
-      // );
 
       // Traer array de orders
       const jsonOrdersDataByOrg = await this.peticionesService.getOrdersByOrganization(
         this.id
       );
       this.ordersData = jsonOrdersDataByOrg.orderInfo;
-      // console.log('this.ordersData', this.ordersData);
+
+      // Traer array de baskets
+      const jsonBasketsDataByOrg = await this.peticionesService.getBasketsByOrganization(
+        this.id
+      );
+      this.basketsData = jsonBasketsDataByOrg.basketInfo;
+      // console.log('OrganizationHomeComponent -> basketsData', this.basketsData);
     } catch (error) {
       console.log('OrganizationHomeComponent -> error', error);
     }
   }
 
-  closeSession(): void {
-    this.router.navigate(['/home']);
-    sessionStorage.clear();
-  }
-  loadSection($event): void {
-    this.section = $event.target.dataset.section;
-  }
   async addDeliveryPoint(): Promise<any> {
     try {
       const deliveryData = this.formDelivery.value;
@@ -83,14 +91,9 @@ export class OrganizationHomeComponent implements OnInit {
         this.id,
         deliveryData
       );
-      console.log(
-        'OrganizationHomeComponent -> jsonCreateOrganization',
-        jsonCreateOrganization
-      );
-      console.log('OrganizationHomeComponent -> deliveryData', deliveryData);
 
+      this.deliveryPointsData.push(deliveryData.delivery_points); // hago el push
       this.formDelivery.reset();
-      this.deliveryPointsData.push(deliveryData);
     } catch (error) {
       console.log(error);
     }
@@ -106,5 +109,31 @@ export class OrganizationHomeComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async createBasket(): Promise<any> {
+    try {
+      const basketData = this.formBasket.value;
+      basketData.organization = this.id;
+      basketData._id = this.id;
+      // console.log('FormsComponent -> addUserToBBDD -> basketData', basketData);
+
+      const jsonCreateBasket = this.peticionesService.createBasket(basketData);
+      // console.log('Basket Created ');
+
+      // TODO hacer el push para que se actualice la tabla en tiempo real ,como hago el push?
+
+      this.formBasket.reset();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  closeSession(): void {
+    this.router.navigate(['/home']);
+    sessionStorage.clear();
+  }
+  loadSection($event): void {
+    this.section = $event.target.dataset.section;
   }
 }
