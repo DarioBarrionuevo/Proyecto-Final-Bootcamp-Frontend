@@ -22,7 +22,7 @@ const routes: Routes = [
     canActivate: [LoginGuard],
   },
   {
-    path: 'userCheckout/:id',
+    path: 'userCheckout/:id/:idOrg',
     component: UserCheckoutComponent,
     canActivate: [LoginGuard],
   },

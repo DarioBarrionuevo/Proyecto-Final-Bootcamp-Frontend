@@ -31,7 +31,7 @@
         <th>FECHA PEDIDO</th>
         <th>FORMATO</th>
         <th>CONTENIDO</th>
-        <th>ACTIVA</th>
+        <th>PAGADO</th>
       </tr>
     </thead>
     <tbody>
@@ -52,9 +52,10 @@
 <!-- PUNTOS DE ENTREGA  //TODOhacerlo con el maps -->
 
 <div class="container" *ngIf="section === 'deliveryPoints'">
+
+  <!-- ADD -->
   <div class="container containerDeliveryPoints">
     <h1>AÑADE UN PUNTO DE RECOGIDA</h1>
-
     <form novalidate [formGroup]="formDelivery" (ngSubmit)="addDeliveryPoint()">
       <div class="sign-up-form">
 
@@ -63,17 +64,11 @@
         </div>
         <div class="group mt-2"> <input type="submit" class="button" value="Añadir">
         </div>
-
-
       </div>
     </form>
-
-
-
-
-
   </div>
 
+  <!-- SHOW -->
   <div class="container">
     <div class="card mb-3 grey" *ngFor="let point of deliveryPointsData;let index = index;">
       <!-- <img src="../../assets/img/delivery.jpg" class="card-img-top" /> -->

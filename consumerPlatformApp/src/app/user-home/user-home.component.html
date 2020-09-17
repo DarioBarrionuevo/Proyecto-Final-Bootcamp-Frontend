@@ -1,1 +1,37 @@
-<p>user-home works!</p>
+<div class="container grey borderXwidth col-8">
+  <a data-section="orders" (click)="loadSection($event)">PEDIDOS</a>
+  <a data-section="deliveryPoints" (click)="loadSection($event)">PUNTOS DE RECOGIDA</a>
+  <a (click)="closeSession()">CERRAR SESION</a>
+</div>
+
+<div class="welcome container2 grey col-5">
+  <h1>¡¡ Bienvenido <strong>{{jsonUserData?.user_name}}</strong> !! Estos son tus datos:
+  </h1>
+  <h3> {{jsonUserData?.name}}, {{jsonUserData?.surname1}} {{jsonUserData?.surname2}}</h3>
+  <h3>{{jsonUserData?.email}}, {{jsonUserData?.phone_number}}</h3>
+</div>
+
+<!-- PUNTOS DE ENTREGA  //TODOhacerlo con el maps -->
+
+<div class="container" *ngIf="section === 'deliveryPoints'">
+
+  <div class="container grey mt-2 col-10" *ngFor="let org of jsonOrgData | keyvalue">
+    <h1 class="text-uppercase">{{org.value.name}}</h1>
+
+    <div class="row justify-content-center">
+      <div class="card col-3 m-2" *ngFor="let point of org.value.delivery_points">
+        <img src="../../assets/img/deliveryPoint.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{point}}</h5>
+
+          <button class="btn btn-primary" (click)="goToCheckout(org.value._id)">RECOGER AQUI</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDERS -->
+<div class="container" *ngIf="section === 'orders'">
+  <h1>olaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1>
+</div>

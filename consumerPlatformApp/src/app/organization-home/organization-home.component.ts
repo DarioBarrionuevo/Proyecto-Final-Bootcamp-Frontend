@@ -36,6 +36,8 @@ export class OrganizationHomeComponent implements OnInit {
       pageLength: 5,
       lengthMenu: [5, 10, 25],
       processing: true,
+      dom: 'Bfrtip',
+      buttons: ['copy', 'csv', 'excel', 'print'],
     };
 
     this.formDelivery = new FormGroup({
@@ -88,7 +90,7 @@ export class OrganizationHomeComponent implements OnInit {
       console.log('OrganizationHomeComponent -> deliveryData', deliveryData);
 
       this.formDelivery.reset();
-      // location.reload();
+      this.deliveryPointsData.push(deliveryData);
     } catch (error) {
       console.log(error);
     }

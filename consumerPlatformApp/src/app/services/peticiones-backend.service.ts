@@ -84,6 +84,46 @@ export class PeticionesBackendService {
       )
       .toPromise();
   }
+  getOneUser(pId): Promise<any> {
+    const httpHeaders = {
+      headers: {
+        'x-access-token': this.token,
+      },
+    };
+
+    return this.httpClient
+      .get<any>(`http://localhost:3000/users/getOneUser/${pId}`, httpHeaders)
+      .toPromise();
+  }
+  getAllOrganizations(): Promise<any> {
+    // const httpHeaders = {
+    //   headers: {
+    //     'x-access-token': this.token,
+    //   },
+    // };
+
+    return this.httpClient
+      .get<any>(
+        `http://localhost:3000/organizations/getAllOrganizations`
+        // httpHeaders
+      )
+      .toPromise();
+  }
+  getAllUsers(): Promise<any> {
+    // const httpHeaders = {
+    //   headers: {
+    //     'x-access-token': this.token,
+    //   },
+    // };
+
+    return this.httpClient
+      .get<any>(
+        `http://localhost:3000/users/getAllUsers`
+        // httpHeaders
+      )
+      .toPromise();
+  }
+
   getOrdersByOrganization(pId): Promise<any> {
     const httpHeaders = {
       headers: {
