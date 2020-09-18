@@ -9,6 +9,10 @@ import { PeticionesBackendService } from '../services/peticiones-backend.service
   styleUrls: ['./user-home.component.css'],
 })
 export class UserHomeComponent implements OnInit {
+  // maps
+  deliveryPointsCoordinates: [object];
+  lat: string;
+  lon: string;
   // ngIf
   section: string;
   // Organization with Delivery points data
@@ -42,6 +46,8 @@ export class UserHomeComponent implements OnInit {
     try {
       // traer info de todas las organizaciones para los delivery
       this.jsonOrgData = await this.peticionesService.getAllOrganizations();
+      // console.log('UserHomeComponent -> this.jsonOrgData', this.jsonOrgData);
+
       // traer info de user
 
       const jsonUserDataFromBBDD = await this.peticionesService.getOneUser(
@@ -56,7 +62,28 @@ export class UserHomeComponent implements OnInit {
       );
 
       this.ordersData = jsonOrdersDataByUser.orderInfo;
-      console.log('this.ordersData', this.ordersData);
+      // console.log('this.ordersData', this.ordersData);
+
+      // traer lat y lon from the googleAPI geolocation
+      for (const org in this.jsonOrgData) {
+        if (this.jsonOrgData.hasOwnProperty(org)) {
+          this.jsonOrgData[org].coords = [];
+          for (const deliverypoint of this.jsonOrgData[org].delivery_points) {
+            const coordinates = await this.peticionesService.getCoordinates(
+              deliverypoint
+            );
+            this.jsonOrgData[org].coords.push(
+              coordinates.results[0].geometry.location
+            );
+            // console.log(
+            //   'UserHomeComponent -> coordinates',
+            //   this.jsonOrgData[org].coords
+            // );
+          }
+        }
+      }
+
+      // console.log('ddddddddddddddddddddddddd', this.jsonOrgData);
     } catch (error) {
       console.log('OrganizationHomeComponent -> error', error);
     }

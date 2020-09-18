@@ -109,3 +109,19 @@ img {
   width: 100%;
   height: 250px;
 }
+
+/* estilos card  */
+.deliveryPoint {
+  /* height: 18rem; */
+}
+
+.deliveryPoint > img {
+  height: 10rem;
+}
+/* estilos map */
+agm-map {
+  /* width: 10rem;
+  height: 10rem; */
+  width: 100%;
+  height: 250px;
+}

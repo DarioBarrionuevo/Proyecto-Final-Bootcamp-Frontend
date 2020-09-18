@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +36,9 @@ import { LoginOrganizationComponent } from './login-organization/login-organizat
     ReactiveFormsModule,
     HttpClientModule,
     DataTablesModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBP4AqgTC6EPZ8HMKMgmvUOxKlkHgigB54',
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
