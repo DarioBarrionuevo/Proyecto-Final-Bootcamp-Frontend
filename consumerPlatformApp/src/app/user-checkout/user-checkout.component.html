@@ -1,1 +1,91 @@
-<p>user-checkout works!</p>
+<div class="container grey borderXwidth col-8">
+  <!-- <a>CONFIRMACION DE PEDIDO</a> -->
+  <a (click)="goBack()">VOLVER ATRAS</a>
+  <a data-section="baskets" (click)="loadSection($event)">VER CESTAS</a>
+
+  <a (click)="closeSession()">CERRAR SESION</a>
+</div>
+
+<div class="welcome container2 grey col-5">
+  <h1>
+    Punto de recogida: <strong>{{deliveryPointInfo}}</strong>
+  </h1>
+  <h1>
+    Organizacion: <strong>{{organizationName}}</strong>
+  </h1>
+</div>
+
+<!-- ORDER BASKET -->
+<div class="container col-11" *ngIf="section === 'baskets'">
+  <div class="container containerBaskets2 col-11 ">
+    <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions">
+      <thead>
+        <tr>
+          <!-- HEADERS-->
+          <th>IDENTIFICADOR</th>
+          <th>FORMATO</th>
+          <th>CONTENIDO</th>
+          <th>FECHA DE CREACION</th>
+          <th>PRECIO</th>
+          <th>STOCK</th>
+          <!-- <th>CANTIDAD</th>
+          <th>TOTAL</th> -->
+          <!-- <th>COMPROBANTE</th>-->
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ARRAY -->
+        <tr *ngFor="let basket of basketsData,let i = index">
+          <td>{{ i +1}}</td>
+          <td>{{ basket?.format }}</td>
+          <td>{{ basket?.content }}</td>
+          <td>{{ basket?.creation_date }}</td>
+          <td>{{ basket?.price }} €</td>
+          <td>{{ basket?.stock }}</td>
+
+
+
+          <!-- <td><button (click)="
+              chooseBasket(i)">ELEGIR</button>
+          </td> -->
+          <!--paso el indice para saber que elemento del array de basket data es el que he elegido -->
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container grey whiteLetters col-11 marginBottomForFooter">
+
+    <form novalidate [formGroup]="formCheckout" (ngSubmit)="checkout()">
+      <div class="group">
+        <label class="mr-4">ELige el identificador de cesta:
+          <select name="numberOfBasket" class="form-control " formControlName="numberOfBasket">
+            <option *ngFor="let number of basketsData,let i = index" value="{{i +1}}">{{i +1}}</option>
+          </select> </label>
+      </div>
+      <div class="group">
+        <label class="mr-4">
+          <h1>Selecciona la foto del comprobante bancario: </h1>
+        </label>
+        <input name="picture" type="file" required accept="image/*" formControlName="picture">
+
+      </div>
+      <div class="group ">
+        <input type="submit" class="btn btn-success btn-block" value="FINALIZAR">
+
+      </div>
+
+    </form>
+
+
+
+
+  </div>
+
+
+
+
+</div>

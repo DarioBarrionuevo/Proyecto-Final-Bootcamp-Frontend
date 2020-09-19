@@ -220,4 +220,20 @@ export class PeticionesBackendService {
       )
       .toPromise();
   }
+  createOrder(pOrderData): any {
+    const httpHeaders = {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': this.token,
+      },
+    };
+
+    return this.httpClient
+      .post<any>(
+        'http://localhost:3000/orders/createOrder',
+        JSON.stringify(pOrderData),
+        httpHeaders
+      )
+      .toPromise();
+  }
 }

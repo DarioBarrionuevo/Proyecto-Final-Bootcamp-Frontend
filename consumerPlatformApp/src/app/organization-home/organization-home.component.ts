@@ -54,6 +54,7 @@ export class OrganizationHomeComponent implements OnInit {
       format: new FormControl(),
       content: new FormControl(),
       stock: new FormControl(),
+      price: new FormControl(),
     });
   }
 
@@ -116,7 +117,7 @@ export class OrganizationHomeComponent implements OnInit {
       const basketData = this.formBasket.value;
       basketData.organization = this.id;
       basketData._id = this.id;
-      // console.log('FormsComponent -> addUserToBBDD -> basketData', basketData);
+      console.log('FormsComponent -> addUserToBBDD -> basketData', basketData);
 
       const jsonCreateBasket = this.peticionesService.createBasket(basketData);
       // console.log('Basket Created ');

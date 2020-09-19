@@ -27,10 +27,6 @@ export class LoginUserComponent implements OnInit {
       const userData = this.formUser.value;
       // console.log('LoginUserComponent -> ngOnInit -> userData', userData);
       const jsonUserLogin = await this.peticionesService.userLogin(userData);
-      console.log(
-        'LoginUserComponent -> ngOnInit -> jsonUserLogin',
-        jsonUserLogin
-      );
 
       sessionStorage.setItem(
         'user_name',

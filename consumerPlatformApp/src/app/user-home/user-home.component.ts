@@ -75,10 +75,6 @@ export class UserHomeComponent implements OnInit {
             this.jsonOrgData[org].coords.push(
               coordinates.results[0].geometry.location
             );
-            // console.log(
-            //   'UserHomeComponent -> coordinates',
-            //   this.jsonOrgData[org].coords
-            // );
           }
         }
       }
@@ -96,8 +92,14 @@ export class UserHomeComponent implements OnInit {
   loadSection($event): void {
     this.section = $event.target.dataset.section;
   }
-  goToCheckout(pIdOrg): void {
-    console.log('UserHomeComponent -> goToCheckout -> pIdOrg', pIdOrg);
-    this.router.navigate([`/userCheckout`, this.id, pIdOrg]); // le paso el segundo parametro que es la id de la organizacion
+  goToCheckout(pIdOrg, pOrgName, pDeliveryPoint): void {
+    this.router.navigate([
+      `/userCheckout`,
+      this.id,
+      pIdOrg,
+      pOrgName,
+      pDeliveryPoint,
+    ]);
+    // le paso el segundo parametro que es la id de la organizacion
   }
 }

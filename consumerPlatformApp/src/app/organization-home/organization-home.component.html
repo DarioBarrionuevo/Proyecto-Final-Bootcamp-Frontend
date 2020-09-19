@@ -19,7 +19,7 @@
 </div>
 
 <!-- ORDERS -->
-<div class="container containerOrders col-11" *ngIf="section === 'orders'">
+<div class="container containerOrders col-11 marginBottomForFooter" *ngIf="section === 'orders'">
   <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions">
     <thead>
       <tr>
@@ -31,6 +31,7 @@
         <th>FECHA PEDIDO</th>
         <th>FORMATO</th>
         <th>CONTENIDO</th>
+        <th>PRECIO</th>
         <th>PAGADO</th>
       </tr>
     </thead>
@@ -44,6 +45,7 @@
         <td>{{ order?.order_date }}</td>
         <td>{{ order?.basket.format }}</td>
         <td>{{ order?.basket.content }}</td>
+        <td>{{ order?.basket.price }} €</td>
         <td>{{ order?.paid }}</td>
       </tr>
     </tbody>
@@ -51,7 +53,7 @@
 </div>
 
 <!-- PUNTOS DE ENTREGA  //TODOhacerlo con el maps -->
-<div class="container" *ngIf="section === 'deliveryPoints'">
+<div class="container marginBottomForFooter" *ngIf="section === 'deliveryPoints'">
 
   <!-- ADD -->
   <div class="container containerDeliveryPoints">
@@ -84,7 +86,7 @@
 </div>
 
 <!-- CREAR CESTAS  lista de las que hay y añadir-->
-<div class="container col-11" *ngIf="section === 'baskets'">
+<div class="container col-11 marginBottomForFooter" *ngIf="section === 'baskets'">
 
   <!-- ADD BASKET -->
   <div class="container containerBaskets grey">
@@ -104,9 +106,14 @@
         <div class="group">
           <textarea name="content" class="form-control" rows="3" formControlName="content"></textarea>
         </div>
+
         <div class="group">
-          <label>
-            Selecciona la cantidad de stock disponible
+          <label>Introduce aquí el precio de la cesta en euros
+            <input name="price" type="number" min="1" max="100" step="any" formControlName="price" />
+          </label>
+        </div>
+        <div class="group">
+          <label> Selecciona la cantidad de stock disponible
             <input type="number" name="stock" min="1" max="100" formControlName="stock">
           </label>
         </div>
@@ -126,6 +133,7 @@
           <th>FORMATO</th>
           <th>CONTENIDO</th>
           <th>FECHA DE CREACION</th>
+          <th>PRECIO</th>
           <th>STOCK</th>
 
         </tr>
@@ -137,6 +145,7 @@
           <td>{{ basket?.format }}</td>
           <td>{{ basket?.content }}</td>
           <td>{{ basket?.creation_date }}</td>
+          <td>{{ basket?.price }} €</td>
           <td>{{ basket?.stock }}</td>
 
         </tr>

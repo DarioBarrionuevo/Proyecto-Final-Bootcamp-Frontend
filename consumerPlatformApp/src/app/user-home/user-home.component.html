@@ -17,7 +17,7 @@
 </div>
 
 <!-- ORDERS -->
-<div class="container containerOrders col-11" *ngIf="section === 'orders'">
+<div class="container containerOrders col-11 marginBottomForFooter" *ngIf="section === 'orders'">
   <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions">
     <thead>
       <tr>
@@ -28,6 +28,7 @@
         <th>FECHA PEDIDO</th>
         <th>FORMATO</th>
         <th>CONTENIDO</th>
+        <th>PRECIO</th>
         <th>PAGADO</th>
       </tr>
     </thead>
@@ -40,36 +41,33 @@
         <td>{{ order?.order_date }}</td>
         <td>{{ order?.basket.format }}</td>
         <td>{{ order?.basket.content }}</td>
+        <td>{{ order?.basket.price }} €</td>
         <td>{{ order?.paid }}</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<!-- prueba de mapa -->
 
-<div class="container containerMap"></div>
 <!-- PUNTOS DE ENTREGA   //TODOhacerlo con el maps -->
 
-<div class="container col-12" *ngIf="section === 'deliveryPoints'">
-  <div class="container grey mt-2 " *ngFor="let org of jsonOrgData | keyvalue">
+<div class="container col-12 marginBottomForFooter" *ngIf="section === 'deliveryPoints'">
+  <div class="container grey mt-4" *ngFor="let org of jsonOrgData | keyvalue">
     <h1 class="text-uppercase">{{ org.value.name }}</h1>
-    <div class="row justify-content-around ">
-
-      <div class="card col-5 m-2" *ngFor="let coord of org.value.coords;let i = index;">
-        <h5>{{org.value.delivery_points[i]}}</h5>
+    <div class="row justify-content-around">
+      <div class="card col-5 m-2" *ngFor="let coord of org.value.coords; let i = index">
+        <h5>{{ org.value.delivery_points[i] }}</h5>
 
         <agm-map [latitude]="coord.lat" [longitude]="coord.lng" [zoom]="15" [mapTypeId]="'roadmap'">
           <agm-marker [latitude]="coord.lat" [longitude]="coord.lng">
             <!-- <agm-info-window> TELEFONO: {{ org.value.phone_number }} </agm-info-window> -->
           </agm-marker>
         </agm-map>
-        <button class="btn btn-primary m-2" (click)="goToCheckout(org.value._id)">
+        <button class="btn btn-primary m-2"
+          (click)="goToCheckout(org.value._id,org.value.name, org.value.delivery_points[i])">
           RECOGER AQUI
         </button>
       </div>
-
-
     </div>
   </div>
 </div>
