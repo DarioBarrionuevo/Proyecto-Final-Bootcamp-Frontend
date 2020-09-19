@@ -63,8 +63,8 @@ export class UserCheckoutComponent implements OnInit {
         // parmas.id o params.idorg
       });
 
-      // Traer array de baskets
-      const jsonBasketsDataByOrg = await this.peticionesService.getBasketsByOrganization(
+      // Traer array de baskets activas
+      const jsonBasketsDataByOrg = await this.peticionesService.getBasketsActiveByOrganization(
         this.organizationId
       );
       this.basketsData = jsonBasketsDataByOrg.basketInfo;

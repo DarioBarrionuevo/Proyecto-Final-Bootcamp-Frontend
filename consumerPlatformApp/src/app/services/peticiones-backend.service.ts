@@ -213,6 +213,20 @@ export class PeticionesBackendService {
       )
       .toPromise();
   }
+  getBasketsActiveByOrganization(pId): Promise<any> {
+    const httpHeaders = {
+      headers: {
+        'x-access-token': this.token,
+      },
+    };
+
+    return this.httpClient
+      .get<any>(
+        `http://localhost:3000/baskets/getBasketsActiveByOrganization/${pId}`,
+        httpHeaders
+      )
+      .toPromise();
+  }
   getCoordinates(pStreetName): Promise<any> {
     return this.httpClient
       .get<any>(
