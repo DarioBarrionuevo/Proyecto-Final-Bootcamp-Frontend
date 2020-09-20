@@ -61,20 +61,27 @@
 
     <form novalidate [formGroup]="formCheckout" (ngSubmit)="checkout()">
       <div class="group">
-        <label class="mr-4">ELige el identificador de cesta:
+        <label class="mr-4">Elige el identificador de cesta:
           <select name="numberOfBasket" class="form-control " formControlName="numberOfBasket">
             <option *ngFor="let number of basketsData,let i = index" value="{{i +1}}">{{i +1}}</option>
-          </select> </label>
+          </select>
+          <p class="error"
+            *ngIf="formCheckout.controls.numberOfBasket.errors?.required && formCheckout.controls.numberOfBasket.touched">
+            El campo no puede estar vacio</p>
+        </label>
       </div>
       <div class="group">
         <label class="mr-4">
           <h1>Selecciona la foto del comprobante bancario: </h1>
         </label>
         <input name="picture" type="file" required accept="image/*" formControlName="picture">
+        <p class="error"
+          *ngIf="formCheckout.controls.picture.errors?.required && formCheckout.controls.picture.touched">
+          El campo no puede estar vacio</p>
 
       </div>
       <div class="group ">
-        <input type="submit" class="btn btn-success btn-block" value="FINALIZAR">
+        <input [disabled]="!formCheckout.valid" type="submit" class="btn btn-success btn-block" value="FINALIZAR">
 
       </div>
 

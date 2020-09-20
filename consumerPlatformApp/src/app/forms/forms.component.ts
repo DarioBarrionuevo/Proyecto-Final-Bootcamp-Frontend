@@ -17,24 +17,53 @@ export class FormsComponent implements OnInit {
     private peticionesService: PeticionesBackendService
   ) {
     this.formUser = new FormGroup({
-      name: new FormControl(),
-      surname1: new FormControl(),
-      surname2: new FormControl(),
-      email: new FormControl(),
-      phone_number: new FormControl(),
-      user_name: new FormControl(),
-      password: new FormControl(),
-      zip_code: new FormControl(),
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      surname1: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      surname2: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/),
+      ]),
+      phone_number: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\(\+\d{2,3}\)\d{9}$/),
+      ]),
+      user_name: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      zip_code: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\d{5}$/),
+      ]),
     });
     this.formOrg = new FormGroup({
-      name: new FormControl(),
-      address: new FormControl(),
-      nif: new FormControl(),
-      email: new FormControl(),
-      phone_number: new FormControl(),
-      user_name: new FormControl(),
-      password: new FormControl(),
-      delivery_points: new FormControl(),
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      address: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      nif: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          /^(X(-|\.)?0?\d{7}(-|\.)?[A-Z]|[A-Z](-|\.)?\d{7}(-|\.)?[0-9A-Z]|\d{8}(-|\.)?[A-Z])$/ // nif nie cif
+        ),
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/),
+      ]),
+      phone_number: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\(\+\d{2,3}\)\d{9}$/),
+      ]),
+      user_name: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      delivery_points: new FormControl('', [Validators.required]),
     });
   }
 
@@ -52,11 +81,9 @@ export class FormsComponent implements OnInit {
   async addUserToBBDD(): Promise<any> {
     try {
       const userData = this.formUser.value;
-      console.log('FormsComponent -> addUserToBBDD -> userData', userData);
 
       const jsonCreateUser = this.peticionesService.createUser(userData);
-      console.log('User created');
-
+      alert('!Enhorabuena, usuario creado!');
       this.formUser.reset();
     } catch (error) {
       console.log(error);
@@ -69,7 +96,7 @@ export class FormsComponent implements OnInit {
       const jsonCreateOrganization = this.peticionesService.createOrganization(
         orgData
       );
-      console.log('Organization created');
+      alert('!Enhorabuena, organización creada!');
 
       this.formOrg.reset();
     } catch (error) {

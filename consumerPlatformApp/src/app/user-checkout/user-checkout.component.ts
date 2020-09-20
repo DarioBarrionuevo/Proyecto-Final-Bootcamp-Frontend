@@ -40,8 +40,8 @@ export class UserCheckoutComponent implements OnInit {
     this.basketsData = [];
     // Checkout form
     this.formCheckout = new FormGroup({
-      numberOfBasket: new FormControl(),
-      picture: new FormControl(),
+      numberOfBasket: new FormControl('', [Validators.required]),
+      picture: new FormControl('', [Validators.required]),
     });
     // create order
     this.orderData = {};

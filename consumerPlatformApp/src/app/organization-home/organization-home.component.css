@@ -139,3 +139,20 @@ img {
   margin-top: 5px;
   margin-bottom: 15px;
 }
+
+/* FORMS */
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 3px solid red !important;
+}
+
+input.ng-valid.ng-touched,
+select.ng-valid.ng-touched,
+textarea.ng-valid.ng-touched {
+  border: 3px solid green !important;
+}
+
+.error {
+  color: rgb(255, 255, 255);
+}

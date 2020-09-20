@@ -48,13 +48,13 @@ export class OrganizationHomeComponent implements OnInit {
     };
 
     this.formDelivery = new FormGroup({
-      delivery_points: new FormControl(),
+      delivery_points: new FormControl('', [Validators.required]),
     });
     this.formBasket = new FormGroup({
-      format: new FormControl(),
-      content: new FormControl(),
-      stock: new FormControl(),
-      price: new FormControl(),
+      format: new FormControl('', [Validators.required]),
+      content: new FormControl('', [Validators.required]),
+      stock: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required]),
     });
   }
 
@@ -125,6 +125,7 @@ export class OrganizationHomeComponent implements OnInit {
       // TODO hacer el push para que se actualice la tabla en tiempo real ,como hago el push?
 
       this.formBasket.reset();
+      location.reload();
     } catch (error) {
       console.log(error);
     }

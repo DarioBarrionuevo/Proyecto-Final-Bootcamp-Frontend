@@ -13,29 +13,81 @@
                 <div class="login">
                   <div class="group"><input id="userName" name="name" type="text" class="form-control"
                       placeholder="Pon aquí tu nombre" formControlName="name">
+                    <p class="error" *ngIf="
+                      formUser.controls.name.errors?.required &&
+                      formUser.controls.name.touched">
+                      El campo no puede estar vacio</p>
+                    <p class="error" *ngIf="
+                      formUser.controls.name.errors?.minlength &&
+                      formUser.controls.name.touched">
+                      El campo tiene que tener al
+                      menos 3 caracteres</p>
                   </div>
                   <div class="group"> <input id="userSurname1" name="surname1" type="text" class="form-control"
-                      placeholder="Pon aquí tu primer apellido" formControlName="surname1"> </div>
+                      placeholder="Pon aquí tu primer apellido" formControlName="surname1">
+                    <p class="error" *ngIf="
+                      formUser.controls.surname1.errors?.required &&
+                      formUser.controls.surname1.touched">
+                      El campo no puede estar vacio</p>
+                    <p class="error" *ngIf="
+                      formUser.controls.surname1.errors?.minlength &&
+                      formUser.controls.surname1.touched">
+                      El campo tiene que tener al
+                      menos 3 caracteres</p>
+                  </div>
                   <div class="group"><input id="userSurname2" name="surname2" type="text" class="form-control"
                       placeholder="Pon aquí tu segundo apellido" formControlName="surname2">
+                    <p class="error" *ngIf="
+                      formUser.controls.surname2.errors?.required &&
+                      formUser.controls.surname2.touched">
+                      El campo no puede estar vacio</p>
+                    <p class="error" *ngIf="
+                      formUser.controls.surname2.errors?.minlength &&
+                      formUser.controls.surname2.touched">
+                      El campo tiene que tener al
+                      menos 3 caracteres</p>
                   </div>
                   <div class="group"><input id="userMail" name="email" type="email" class="form-control"
                       placeholder="Pon aquí tu email" formControlName="email">
+                    <p class="error"
+                      *ngIf="formUser.controls.email.errors?.required && formUser.controls.email.touched">
+                      El campo no puede estar vacio</p>
+                    <p class="error" *ngIf="formUser.controls.email.errors?.pattern && formUser.controls.email.touched">
+                      Tiene que ser un email valido</p>
                   </div>
                   <div class="group"> <input id="userPhone" name="phone_number" type="tel" class="form-control"
-                      placeholder="Pon aquí tu telefono" formControlName="phone_number">
+                      placeholder="Pon aquí tu telefono (+xx)xxxxxxxxx" formControlName="phone_number">
+                    <p class="error"
+                      *ngIf="formUser.controls.phone_number.errors?.required && formUser.controls.phone_number.touched">
+                      El campo no puede estar vacio</p>
+                    <p class="error"
+                      *ngIf="formUser.controls.phone_number.errors?.pattern && formUser.controls.phone_number.touched">
+                      Tienes que ser un telefono valido (+xx)xxxxxxxxx</p>
                   </div>
                   <div class="group"><input id="userUserName" name="user_name" type="text" class="form-control"
                       placeholder="Pon aquí tu nombre de usuario" formControlName="user_name">
+                    <p class="error"
+                      *ngIf="formUser.controls.user_name.errors?.required && formUser.controls.user_name.touched">
+                      El campo no puede estar vacio</p>
                   </div>
                   <div class="group"><input id="userPass" name="password" type="password" class="form-control"
                       data-type="password" placeholder="Pon aquí tu contraseña" formControlName="password">
+                    <p class="error"
+                      *ngIf="formUser.controls.password.errors?.required && formUser.controls.password.touched">
+                      El campo no puede estar vacio</p>
                   </div>
                   <div class="group"><input id="userZipCode" name="zip_code" type="text" pattern="[0-9]{5}"
                       class="form-control" placeholder="Pon aquí tu código postal" formControlName="zip_code">
+                    <p class="error"
+                      *ngIf="formUser.controls.zip_code.errors?.required && formUser.controls.zip_code.touched">
+                      El campo no puede estar vacio</p>
+                    <p class="error"
+                      *ngIf="formUser.controls.zip_code.errors?.pattern && formUser.controls.zip_code.touched">
+                      Tienes que ser un codigo postal valido</p>
                   </div>
 
-                  <div class="group"> <input type="submit" class="button" value="Registrate">
+                  <div class="group"> <input [disabled]="!formUser.valid" type="submit" class="button"
+                      value="Registrate">
                   </div>
 
 
@@ -47,30 +99,59 @@
                 <div class="sign-up-form">
                   <div class="group"><input id="orgName" name="name" type="text" class="form-control"
                       placeholder="Pon aquí el nombre" formControlName="name">
+                    <p class="error" *ngIf="formOrg.controls.name.errors?.required && formOrg.controls.name.touched">
+                      El campo no puede estar vacio</p>
                   </div>
                   <div class="group"> <input id="orgAddress" name="address" type="text" class="form-control"
                       placeholder="Pon aquí la dirección" formControlName="address">
+                    <p class="error"
+                      *ngIf="formOrg.controls.address.errors?.required && formOrg.controls.address.touched">
+                      El campo no puede estar vacio</p>
                   </div>
                   <div class="group"><input id="orgNIF" name="nif" type="text" class="form-control"
                       placeholder="Pon aquí el NIF" formControlName="nif">
+                    <p class="error" *ngIf="formOrg.controls.nif.errors?.required && formOrg.controls.nif.touched">
+                      El campo no puede estar vacio</p>
+                    <p class="error" *ngIf="formOrg.controls.nif.errors?.pattern && formOrg.controls.nif.touched">
+                      Tienes que ser un nif valido</p>
                   </div>
                   <div class="group"><input id="orgMail" name="email" type="email" class="form-control"
                       placeholder="Pon aquí el email" formControlName="email">
+                    <p class="error" *ngIf="formOrg.controls.email.errors?.required && formOrg.controls.email.touched">
+                      El campo no puede estar vacio</p>
+                    <p class="error" *ngIf="formOrg.controls.email.errors?.pattern && formOrg.controls.email.touched">
+                      Tiene que ser un email valido</p>
                   </div>
                   <div class="group"> <input id="orgPhone" name="phone_number" type="tel" class="form-control"
-                      placeholder="Pon aquí el telefono" formControlName="phone_number">
+                      placeholder="Pon aquí el telefono (+xx)xxxxxxxxx" formControlName="phone_number">
+                    <p class="error"
+                      *ngIf="formOrg.controls.phone_number.errors?.required && formOrg.controls.phone_number.touched">
+                      El campo no puede estar vacio</p>
+                    <p class="error"
+                      *ngIf="formOrg.controls.phone_number.errors?.pattern && formOrg.controls.phone_number.touched">
+                      Tienes que ser un telefono valido (+xx)xxxxxxxxx</p>
                   </div>
                   <div class="group"><input id="OrgUserName" name="user_name" type="text" class="form-control"
                       placeholder="Pon aquí el nombre de usuario" formControlName="user_name">
+                    <p class="error"
+                      *ngIf="formOrg.controls.user_name.errors?.required && formOrg.controls.user_name.touched">
+                      El campo no puede estar vacio</p>
                   </div>
                   <div class="group"><input id="orgPass" name="password" type="password" class="form-control"
                       data-type="password" placeholder="Pon aquí la contraseña" formControlName="password">
+                    <p class="error"
+                      *ngIf="formOrg.controls.password.errors?.required && formOrg.controls.password.touched">
+                      El campo no puede estar vacio</p>
                   </div>
                   <div class="group"><input id="orgDeliveryPoints" name="delivery_points" type="text"
                       class="form-control" placeholder="Pon aquí los puntos de recogida"
                       formControlName="delivery_points">
+                    <p class="error" *ngIf="formOrg.controls.delivery_points.errors?.required &&
+                      formOrg.controls.delivery_points.touched">
+                      El campo no puede estar vacio</p>
                   </div>
-                  <div class="group"> <input type="submit" class="button" value="Registrate">
+                  <div class="group"> <input [disabled]="!formOrg.valid" type="submit" class="button"
+                      value="Registrate">
                   </div>
 
 

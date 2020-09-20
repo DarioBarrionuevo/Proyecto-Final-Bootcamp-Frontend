@@ -63,8 +63,11 @@
 
         <div class="group"><input id="orgDeliveryPoints" name="delivery_points" type="text" class="form-control"
             placeholder="Añade el punto de recogida" formControlName="delivery_points">
+          <p class="error" *ngIf="formDelivery.controls.delivery_points.errors?.required &&
+              formDelivery.controls.delivery_points.touched">
+            El campo no puede estar vacio</p>
         </div>
-        <div class="group mt-2"> <input type="submit" class="button" value="Añadir">
+        <div class="group mt-2"> <input [disabled]="!formDelivery.valid" type="submit" class="button" value="Añadir">
         </div>
       </div>
     </form>
@@ -101,23 +104,35 @@
             <option value="Big">Grande</option>
             <option value="Others">Otros</option>
           </select>
+          <p class="error" *ngIf="formBasket.controls.format.errors?.required &&
+              formBasket.controls.format.touched">
+            El campo no puede estar vacio</p>
         </div>
         <label>Introduce aquí todo el contenido de la cesta con las cantidades correspondientes</label>
         <div class="group">
           <textarea name="content" class="form-control" rows="3" formControlName="content"></textarea>
+          <p class="error" *ngIf="formBasket.controls.content.errors?.required &&
+              formBasket.controls.content.touched">
+            El campo no puede estar vacio</p>
         </div>
 
         <div class="group">
           <label>Introduce aquí el precio de la cesta en euros
             <input name="price" type="number" min="1" max="100" step="any" formControlName="price" />
+            <p class="error" *ngIf="formBasket.controls.price.errors?.required &&
+              formBasket.controls.price.touched">
+              El campo no puede estar vacio</p>
           </label>
         </div>
         <div class="group">
           <label> Selecciona la cantidad de stock disponible
             <input type="number" name="stock" min="1" max="100" formControlName="stock">
+            <p class="error" *ngIf="formBasket.controls.stock.errors?.required &&
+              formBasket.controls.stock.touched">
+              El campo no puede estar vacio</p>
           </label>
         </div>
-        <div class="group mt-2"> <input type="submit" class="button" value="Añadir">
+        <div class="group mt-2"> <input [disabled]="!formBasket.valid" type="submit" class="button" value="Añadir">
         </div>
 
       </div>
