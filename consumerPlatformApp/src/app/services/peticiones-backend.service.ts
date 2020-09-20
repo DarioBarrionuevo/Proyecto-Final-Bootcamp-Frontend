@@ -250,4 +250,20 @@ export class PeticionesBackendService {
       )
       .toPromise();
   }
+  sendEmail(pInfo): any {
+    const httpHeaders = {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': this.token,
+      },
+    };
+
+    return this.httpClient
+      .post<any>(
+        'http://localhost:3000/email/sendEmail',
+        JSON.stringify(pInfo),
+        httpHeaders
+      )
+      .toPromise();
+  }
 }

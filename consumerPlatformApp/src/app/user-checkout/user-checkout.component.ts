@@ -28,6 +28,9 @@ export class UserCheckoutComponent implements OnInit {
   formCheckout: FormGroup;
   // create order
   orderData: any;
+  // Organization data
+  organizationData: any;
+  organizationEmail: any;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -75,6 +78,13 @@ export class UserCheckoutComponent implements OnInit {
         this.id
       );
       this.jsonUserData = jsonUserDataFromBBDD.UserInfo[0];
+
+      // traer info de organizacion
+      const jsonOrgData = await this.peticionesService.getOneOrganizationData(
+        this.organizationId
+      );
+      this.organizationEmail = jsonOrgData.organizationInfo[0].email;
+      this.organizationName = jsonOrgData.organizationInfo[0].name;
     } catch (error) {
       console.log('UserCheckoutComponent -> ngOnInit -> error', error);
     }
@@ -95,6 +105,7 @@ export class UserCheckoutComponent implements OnInit {
     try {
       // crear el objeto con toda la informacion para mandar por correo
       const checkoutData = this.formCheckout.value;
+      console.log('UserCheckoutComponent -> checkoutData', checkoutData);
       // Crear la order
 
       this.orderData._id = this.id;
@@ -104,7 +115,7 @@ export class UserCheckoutComponent implements OnInit {
       ]._id;
       this.orderData.user = this.id;
 
-      const jsonCreateORder = this.peticionesService.createOrder(
+      const jsonCreateORder = await this.peticionesService.createOrder(
         this.orderData
       );
       // seguir con el objeto
@@ -115,12 +126,14 @@ export class UserCheckoutComponent implements OnInit {
       checkoutData.email = this.jsonUserData.email;
       checkoutData.phone_number = this.jsonUserData.phone_number;
       checkoutData.basket = this.basketsData[checkoutData.numberOfBasket - 1];
-
+      checkoutData.organization_email = this.organizationEmail;
+      checkoutData.organization_name = this.organizationName;
       console.log('UserCheckoutComponent -> checkoutData', checkoutData);
-      // console.log(
-      //   'UserCheckoutComponent -> this.jsonUserData',
-      //   this.basketsData[checkoutData.numberOfBasket - 1]._id
-      // );
+
+      // sending email
+      const jsonSendEmail = await this.peticionesService.sendEmail(
+        checkoutData
+      );
 
       this.formCheckout.reset();
       // this.router.navigate([`/userHome/${this.id}`]);
