@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PeticionesBackendService } from '../services/peticiones-backend.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-organization-home',
@@ -34,7 +35,8 @@ export class OrganizationHomeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private peticionesService: PeticionesBackendService
+    private peticionesService: PeticionesBackendService,
+    private toastr: ToastrService
   ) {
     this.ordersData = [];
     this.basketsData = [];
@@ -94,6 +96,9 @@ export class OrganizationHomeComponent implements OnInit {
       );
 
       this.deliveryPointsData.push(deliveryData.delivery_points); // hago el push
+
+      this.toastr.info('Punto de recogida añadido correctamente!');
+
       this.formDelivery.reset();
     } catch (error) {
       console.log(error);
@@ -106,6 +111,9 @@ export class OrganizationHomeComponent implements OnInit {
         this.id,
         pIndex
       );
+
+      this.toastr.info('Punto de recogida borrado correctamente!');
+
       this.deliveryPointsData.splice(pIndex, 1);
     } catch (error) {
       console.log(error);
@@ -125,7 +133,8 @@ export class OrganizationHomeComponent implements OnInit {
       // TODO hacer el push para que se actualice la tabla en tiempo real ,como hago el push?
 
       this.formBasket.reset();
-      location.reload();
+      // location.reload();
+      this.toastr.info('Cesta creada correctamente!');
     } catch (error) {
       console.log(error);
     }

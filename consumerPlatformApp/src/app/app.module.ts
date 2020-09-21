@@ -6,6 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import { AgmCoreModule } from '@agm/core';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PaginaErrorComponent } from './pagina-error/pagina-error.component';
@@ -38,6 +42,12 @@ import { LoginOrganizationComponent } from './login-organization/login-organizat
     DataTablesModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBP4AqgTC6EPZ8HMKMgmvUOxKlkHgigB54',
+    }),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3500,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
     }),
   ],
   providers: [],

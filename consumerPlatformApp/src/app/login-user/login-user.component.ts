@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PeticionesBackendService } from '../services/peticiones-backend.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginUserComponent implements OnInit {
   formUser: FormGroup;
   constructor(
     private router: Router,
-    private peticionesService: PeticionesBackendService
+    private peticionesService: PeticionesBackendService,
+    private toastr: ToastrService
   ) {
     this.formUser = new FormGroup({
       user_name: new FormControl(),
@@ -34,6 +36,9 @@ export class LoginUserComponent implements OnInit {
       );
       sessionStorage.setItem('token', JSON.stringify(jsonUserLogin.token));
       sessionStorage.setItem('_id', JSON.stringify(jsonUserLogin._id));
+
+      this.toastr.info('Login completado correctamente!');
+
       this.router.navigate([`/userHome/${jsonUserLogin._id}`]);
     } catch (error) {
       console.log(error);

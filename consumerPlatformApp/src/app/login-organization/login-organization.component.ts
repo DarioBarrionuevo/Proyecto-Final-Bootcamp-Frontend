@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PeticionesBackendService } from '../services/peticiones-backend.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-organization',
@@ -12,7 +13,8 @@ export class LoginOrganizationComponent implements OnInit {
   formOrg: FormGroup;
   constructor(
     private router: Router,
-    private peticionesService: PeticionesBackendService
+    private peticionesService: PeticionesBackendService,
+    private toastr: ToastrService
   ) {
     this.formOrg = new FormGroup({
       user_name: new FormControl(),
@@ -40,6 +42,9 @@ export class LoginOrganizationComponent implements OnInit {
       );
       sessionStorage.setItem('token', JSON.stringify(jsonOrgLogin.token));
       sessionStorage.setItem('_id', JSON.stringify(jsonOrgLogin._id));
+
+      this.toastr.info('Login completado correctamente!');
+
       this.router.navigate([`/orgHome/${jsonOrgLogin._id}`]);
     } catch (error) {
       console.log(error);

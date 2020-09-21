@@ -4,3 +4,8 @@
   background-color: rgb(37, 37, 37);
   color: white;
 }
+
+.footer-copyright a {
+  color: white;
+  text-decoration: none;
+}

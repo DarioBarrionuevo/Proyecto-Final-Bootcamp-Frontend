@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PeticionesBackendService } from '../services/peticiones-backend.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-checkout',
@@ -35,7 +36,8 @@ export class UserCheckoutComponent implements OnInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private router: Router,
-    private peticionesService: PeticionesBackendService
+    private peticionesService: PeticionesBackendService,
+    private toastr: ToastrService
   ) {
     this.basketsData = [];
     // Checkout form
@@ -134,6 +136,7 @@ export class UserCheckoutComponent implements OnInit {
       const jsonSendEmail = await this.peticionesService.sendEmail(
         checkoutData
       );
+      this.toastr.info('Pedido realizado correctamente!');
 
       this.formCheckout.reset();
       // this.router.navigate([`/userHome/${this.id}`]);
