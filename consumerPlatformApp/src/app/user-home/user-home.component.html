@@ -49,7 +49,7 @@
 </div>
 
 
-<!-- PUNTOS DE ENTREGA   //TODOhacerlo con el maps -->
+<!-- DELIVERY POINTS -->
 
 <div class="container col-12 marginBottomForFooter" *ngIf="section === 'deliveryPoints'">
   <div class="container grey mt-4" *ngFor="let org of jsonOrgData | keyvalue">
@@ -60,7 +60,7 @@
 
         <agm-map [latitude]="coord.lat" [longitude]="coord.lng" [zoom]="15" [mapTypeId]="'roadmap'">
           <agm-marker [latitude]="coord.lat" [longitude]="coord.lng">
-            <!-- <agm-info-window> TELEFONO: {{ org.value.phone_number }} </agm-info-window> -->
+            <agm-info-window> TELEFONO ORGANIZACION: {{ org.value.phone_number }} </agm-info-window>
           </agm-marker>
         </agm-map>
         <button class="btn btn-primary m-2"

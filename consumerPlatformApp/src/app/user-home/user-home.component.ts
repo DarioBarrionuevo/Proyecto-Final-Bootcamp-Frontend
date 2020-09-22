@@ -9,7 +9,7 @@ import { PeticionesBackendService } from '../services/peticiones-backend.service
   styleUrls: ['./user-home.component.css'],
 })
 export class UserHomeComponent implements OnInit {
-  // maps
+  // Maps
   deliveryPointsCoordinates: [object];
   lat: string;
   lon: string;
@@ -44,11 +44,11 @@ export class UserHomeComponent implements OnInit {
 
   async ngOnInit(): Promise<any> {
     try {
-      // traer info de todas las organizaciones para los delivery
+      // Bring all org info for the delivery points
       this.jsonOrgData = await this.peticionesService.getAllOrganizations();
       // console.log('UserHomeComponent -> this.jsonOrgData', this.jsonOrgData);
 
-      // traer info de user
+      // Bring user info
 
       const jsonUserDataFromBBDD = await this.peticionesService.getOneUser(
         this.id
@@ -56,7 +56,7 @@ export class UserHomeComponent implements OnInit {
       this.jsonUserData = jsonUserDataFromBBDD.UserInfo[0];
       // console.log('UserHomeComponent -> this.jsonUserData', this.jsonUserData);
 
-      // Traer array de orders //TODO hacerlo con order by user para las tablas
+      // Bring orders array
       const jsonOrdersDataByUser = await this.peticionesService.getOrdersByUser(
         this.id
       );
@@ -64,7 +64,7 @@ export class UserHomeComponent implements OnInit {
       this.ordersData = jsonOrdersDataByUser.orderInfo;
       // console.log('this.ordersData', this.ordersData);
 
-      // traer lat y lon from the googleAPI geolocation
+      // Bring LAT and LON from the googleAPI geolocation
       for (const org in this.jsonOrgData) {
         if (this.jsonOrgData.hasOwnProperty(org)) {
           this.jsonOrgData[org].coords = [];
@@ -78,8 +78,6 @@ export class UserHomeComponent implements OnInit {
           }
         }
       }
-
-      // console.log('ddddddddddddddddddddddddd', this.jsonOrgData);
     } catch (error) {
       console.log('OrganizationHomeComponent -> error', error);
     }
@@ -100,6 +98,5 @@ export class UserHomeComponent implements OnInit {
       pOrgName,
       pDeliveryPoint,
     ]);
-    // le paso el segundo parametro que es la id de la organizacion
   }
 }

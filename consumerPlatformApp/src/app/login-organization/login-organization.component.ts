@@ -31,10 +31,6 @@ export class LoginOrganizationComponent implements OnInit {
       const jsonOrgLogin = await this.peticionesService.organizationLogin(
         orgData
       );
-      console.log(
-        'LoginOrganizationComponent -> ngOnInit -> jsonOrgLogin',
-        jsonOrgLogin
-      );
 
       sessionStorage.setItem(
         'user_name',

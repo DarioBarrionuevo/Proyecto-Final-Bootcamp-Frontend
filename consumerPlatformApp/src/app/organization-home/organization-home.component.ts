@@ -16,7 +16,7 @@ export class OrganizationHomeComponent implements OnInit {
   formDelivery: FormGroup;
   // Orders data
   ordersData: any[];
-  // baskets data
+  // Baskets data
   basketsData: any[];
 
   // Delivery points data
@@ -62,7 +62,7 @@ export class OrganizationHomeComponent implements OnInit {
 
   async ngOnInit(): Promise<any> {
     try {
-      // traer info de organizacion
+      // Bring organization info
       const jsonOrgData = await this.peticionesService.getOneOrganizationData(
         this.id
       );
@@ -70,13 +70,13 @@ export class OrganizationHomeComponent implements OnInit {
 
       this.deliveryPointsData = this.organizationData.delivery_points;
 
-      // Traer array de orders
+      // Bring orders array
       const jsonOrdersDataByOrg = await this.peticionesService.getOrdersByOrganization(
         this.id
       );
       this.ordersData = jsonOrdersDataByOrg.orderInfo;
 
-      // Traer array de baskets
+      // Bring baskets array
       const jsonBasketsDataByOrg = await this.peticionesService.getBasketsByOrganization(
         this.id
       );
@@ -125,7 +125,7 @@ export class OrganizationHomeComponent implements OnInit {
       const basketData = this.formBasket.value;
       basketData.organization = this.id;
       basketData._id = this.id;
-      console.log('FormsComponent -> addUserToBBDD -> basketData', basketData);
+      // console.log('FormsComponent -> addUserToBBDD -> basketData', basketData);
 
       const jsonCreateBasket = this.peticionesService.createBasket(basketData);
       // console.log('Basket Created ');
@@ -133,7 +133,6 @@ export class OrganizationHomeComponent implements OnInit {
       // TODO hacer el push para que se actualice la tabla en tiempo real ,como hago el push?
 
       this.formBasket.reset();
-      // location.reload();
       this.toastr.info('Cesta creada correctamente!');
     } catch (error) {
       console.log(error);

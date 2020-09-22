@@ -85,7 +85,7 @@ div.borderXwidth a:hover:after {
   width: 100%;
 }
 
-/* estilos datatable */
+/* DATATABLE STYLES */
 .containerOrders {
   background-color: white;
 }
@@ -104,7 +104,7 @@ img {
 }
 
 
-/* estilos cards */
+/* CARDS STYLES */
 
 .card {
   color: white;
@@ -112,7 +112,7 @@ img {
   border-radius: 25px;
 }
 
-/* estilos form añadir deliverypoint */
+/* ADD DELIVERY POINT FORM STYLES */
 
 .containerDeliveryPoints>h1 {
   color: white;
@@ -133,7 +133,7 @@ img {
   background: rgb(98, 192, 43)
 }
 
-/* estilos form añadir cesta */
+/* ADD BASKET FORM STYLES */
 
 .group {
   margin-top: 5px;

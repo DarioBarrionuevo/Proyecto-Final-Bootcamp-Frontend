@@ -7,8 +7,9 @@ import { DataTablesModule } from 'angular-datatables';
 import { AgmCoreModule } from '@agm/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { ToastrModule } from 'ngx-toastr';
+
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,9 +47,10 @@ import { LoginOrganizationComponent } from './login-organization/login-organizat
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3500,
-      positionClass: 'toast-bottom-center',
+      positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
+    [TooltipModule],
   ],
   providers: [],
   bootstrap: [AppComponent],

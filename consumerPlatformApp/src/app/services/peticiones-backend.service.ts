@@ -9,7 +9,8 @@ export class PeticionesBackendService {
   constructor(private httpClient: HttpClient) {}
 
   createUser(pUserData): any {
-    fetch('http://localhost:3000/users/createUser', {
+    fetch('https://basket-consumer-platform.herokuapp.com/users/createUser', {
+      // fetch('http://localhost:3000/users/createUser', {
       method: 'POST',
       mode: 'cors',
       body: JSON.stringify(pUserData),
@@ -25,15 +26,19 @@ export class PeticionesBackendService {
       });
   }
   createOrganization(pOrgData): any {
-    fetch('http://localhost:3000/organizations/createOrganization', {
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify(pOrgData),
-      headers: {
-        'Content-Type': 'application/json',
-        // Accept: 'application/x-www-form-urlencoded',
-      },
-    })
+    fetch(
+      'https://basket-consumer-platform.herokuapp.com/organizations/createOrganization',
+      {
+        // fetch('http://localhost:3000/organizations/createOrganization', {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(pOrgData),
+        headers: {
+          'Content-Type': 'application/json',
+          // Accept: 'application/x-www-form-urlencoded',
+        },
+      }
+    )
       .then((res) => res.json())
       .then((json) => {
         // console.log('RESPONSE', json);
@@ -49,7 +54,9 @@ export class PeticionesBackendService {
 
     return this.httpClient
       .post<any>(
-        'http://localhost:3000/organizations/login',
+        'https://basket-consumer-platform.herokuapp.com/organizations/login',
+
+        // 'http://localhost:3000/organizations/login',
         JSON.stringify(pOrgData),
         httpHeaders
       )
@@ -64,7 +71,9 @@ export class PeticionesBackendService {
 
     return this.httpClient
       .post<any>(
-        'http://localhost:3000/users/login',
+        'https://basket-consumer-platform.herokuapp.com/users/login',
+
+        // 'http://localhost:3000/users/login',
         JSON.stringify(pUserData),
         httpHeaders
       )
@@ -79,7 +88,9 @@ export class PeticionesBackendService {
 
     return this.httpClient
       .get<any>(
-        `http://localhost:3000/organizations/getOneOrganization/${pId}`,
+        `https://basket-consumer-platform.herokuapp.com/organizations/getOneOrganization/${pId}`,
+
+        // `http://localhost:3000/organizations/getOneOrganization/${pId}`,
         httpHeaders
       )
       .toPromise();
@@ -91,19 +102,38 @@ export class PeticionesBackendService {
       },
     };
 
-    return this.httpClient
-      .get<any>(`http://localhost:3000/users/getOneUser/${pId}`, httpHeaders)
-      .toPromise();
+    return (
+      this.httpClient
+        .get<any>(
+          `https://basket-consumer-platform.herokuapp.com/users/getOneUser/${pId}`,
+          httpHeaders
+        )
+
+        // .get<any>(`http://localhost:3000/users/getOneUser/${pId}`, httpHeaders)
+        .toPromise()
+    );
   }
   getAllOrganizations(): Promise<any> {
-    return this.httpClient
-      .get<any>(`http://localhost:3000/organizations/getAllOrganizations`)
-      .toPromise();
+    return (
+      this.httpClient
+        .get<any>(
+          `https://basket-consumer-platform.herokuapp.com/organizations/getAllOrganizations`
+        )
+
+        // .get<any>(`http://localhost:3000/organizations/getAllOrganizations`)
+        .toPromise()
+    );
   }
   getAllUsers(): Promise<any> {
-    return this.httpClient
-      .get<any>(`http://localhost:3000/users/getAllUsers`)
-      .toPromise();
+    return (
+      this.httpClient
+        .get<any>(
+          `https://basket-consumer-platform.herokuapp.com/users/getAllUsers`
+        )
+
+        // .get<any>(`http://localhost:3000/users/getAllUsers`)
+        .toPromise()
+    );
   }
   getOrdersByOrganization(pId): Promise<any> {
     const httpHeaders = {
@@ -114,7 +144,9 @@ export class PeticionesBackendService {
 
     return this.httpClient
       .get<any>(
-        `http://localhost:3000/orders/getOrdersByOrganization/${pId}`,
+        `https://basket-consumer-platform.herokuapp.com/orders/getOrdersByOrganization/${pId}`,
+
+        // `http://localhost:3000/orders/getOrdersByOrganization/${pId}`,
         httpHeaders
       )
       .toPromise();
@@ -128,20 +160,26 @@ export class PeticionesBackendService {
 
     return this.httpClient
       .get<any>(
-        `http://localhost:3000/orders/getOrdersByUser/${pId}`,
+        `https://basket-consumer-platform.herokuapp.com/orders/getOrdersByUser/${pId}`,
+
+        // `http://localhost:3000/orders/getOrdersByUser/${pId}`,
         httpHeaders
       )
       .toPromise();
   }
   addDeliveryPointToBBDD(pId, pDeliveryPoint): any {
-    fetch(`http://localhost:3000/organizations/addDeliveryPoint/${pId}`, {
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify(pDeliveryPoint),
-      headers: {
-        'Content-Type': 'application/json', // Important!! is a exception,depends on the headers even when comes from form-urlencoded
-      },
-    })
+    fetch(
+      `https://basket-consumer-platform.herokuapp.com/organizations/addDeliveryPoint/${pId}`,
+      {
+        // fetch(`http://localhost:3000/organizations/addDeliveryPoint/${pId}`, {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(pDeliveryPoint),
+        headers: {
+          'Content-Type': 'application/json', // Important!! is a exception,depends on the headers even when comes from form-urlencoded
+        },
+      }
+    )
       .then((res) => res.json())
       .then((json) => {
         // console.log('RESPONSE', json);
@@ -149,17 +187,21 @@ export class PeticionesBackendService {
       });
   }
   deleteDeliveryPointFromBBDD(pId, pIndex): any {
-    console.log('deleteDeliveryPointFromBBDD -> pIndex', pIndex);
-    console.log('deleteDeliveryPointFromBBDD -> pId', pId);
+    // console.log('deleteDeliveryPointFromBBDD -> pIndex', pIndex);
+    // console.log('deleteDeliveryPointFromBBDD -> pId', pId);
 
-    fetch(`http://localhost:3000/organizations/deleteDeliveryPoint/${pId}`, {
-      method: 'DELETE',
-      mode: 'cors',
-      body: JSON.stringify({ index: pIndex }),
-      headers: {
-        'Content-Type': 'application/json', // Important!! is a exception,depends on the headers even when comes from form-urlencoded
-      },
-    })
+    fetch(
+      `https://basket-consumer-platform.herokuapp.com/organizations/deleteDeliveryPoint/${pId}`,
+      {
+        // fetch(`http://localhost:3000/organizations/deleteDeliveryPoint/${pId}`, {
+        method: 'DELETE',
+        mode: 'cors',
+        body: JSON.stringify({ index: pIndex }),
+        headers: {
+          'Content-Type': 'application/json', // Important!! is a exception,depends on the headers even when comes from form-urlencoded
+        },
+      }
+    )
       .then((res) => res.json())
       .then((json) => {
         // console.log('RESPONSE', json);
@@ -176,28 +218,13 @@ export class PeticionesBackendService {
 
     return this.httpClient
       .post<any>(
-        'http://localhost:3000/baskets/createBasket',
+        'https://basket-consumer-platform.herokuapp.com/baskets/createBasket',
+
+        // 'http://localhost:3000/baskets/createBasket',
         JSON.stringify(pBasketData),
         httpHeaders
       )
       .toPromise();
-
-    // fetch('http://localhost:3000/baskets/createBasket', {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   body: JSON.stringify(pBasketData),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'x-access-token': this.token,
-    //     // Important!! is a exception,depends on the headers even when comes from form-urlencoded
-    //     // Accept: 'application/x-www-form-urlencoded',
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((json) => {
-    //     // console.log('RESPONSE', json);
-    //     return json;
-    //   });
   }
   getBasketsByOrganization(pId): Promise<any> {
     const httpHeaders = {
@@ -208,7 +235,9 @@ export class PeticionesBackendService {
 
     return this.httpClient
       .get<any>(
-        `http://localhost:3000/baskets/getBasketsByOrganization/${pId}`,
+        `https://basket-consumer-platform.herokuapp.com/baskets/getBasketsByOrganization/${pId}`,
+
+        // `http://localhost:3000/baskets/getBasketsByOrganization/${pId}`,
         httpHeaders
       )
       .toPromise();
@@ -222,7 +251,9 @@ export class PeticionesBackendService {
 
     return this.httpClient
       .get<any>(
-        `http://localhost:3000/baskets/getBasketsActiveByOrganization/${pId}`,
+        `https://basket-consumer-platform.herokuapp.com/baskets/getBasketsActiveByOrganization/${pId}`,
+
+        // `http://localhost:3000/baskets/getBasketsActiveByOrganization/${pId}`,
         httpHeaders
       )
       .toPromise();
@@ -244,7 +275,9 @@ export class PeticionesBackendService {
 
     return this.httpClient
       .post<any>(
-        'http://localhost:3000/orders/createOrder',
+        'https://basket-consumer-platform.herokuapp.com/orders/createOrder',
+
+        // 'http://localhost:3000/orders/createOrder',
         JSON.stringify(pOrderData),
         httpHeaders
       )
@@ -260,7 +293,9 @@ export class PeticionesBackendService {
 
     return this.httpClient
       .post<any>(
-        'http://localhost:3000/email/sendEmail',
+        'https://basket-consumer-platform.herokuapp.com/email/sendEmail',
+
+        // 'http://localhost:3000/email/sendEmail',
         JSON.stringify(pInfo),
         httpHeaders
       )

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PeticionesBackendService } from '../services/peticiones-backend.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forms',
@@ -14,7 +15,8 @@ export class FormsComponent implements OnInit {
   formOrg: FormGroup;
   constructor(
     private router: Router,
-    private peticionesService: PeticionesBackendService
+    private peticionesService: PeticionesBackendService,
+    private toastr: ToastrService
   ) {
     this.formUser = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -50,7 +52,7 @@ export class FormsComponent implements OnInit {
       nif: new FormControl('', [
         Validators.required,
         Validators.pattern(
-          /^(X(-|\.)?0?\d{7}(-|\.)?[A-Z]|[A-Z](-|\.)?\d{7}(-|\.)?[0-9A-Z]|\d{8}(-|\.)?[A-Z])$/ // nif nie cif
+          /^(X(-|\.)?0?\d{7}(-|\.)?[A-Z]|[A-Z](-|\.)?\d{7}(-|\.)?[0-9A-Z]|\d{8}(-|\.)?[A-Z])$/ //  VALIDATES NIF NIE CIF
         ),
       ]),
       email: new FormControl('', [
@@ -69,21 +71,13 @@ export class FormsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // getUserData(): void {
-  //   const userData = this.formUser.value;
-  //   console.log('FormsComponent -> getUserData -> userData', userData);
-  // }
-  // getOrganizationData(): void {
-  //   const userData = this.formOrg.value;
-  //   console.log('FormsComponent -> getUserData -> userData', userData);
-  // }
-
   async addUserToBBDD(): Promise<any> {
     try {
       const userData = this.formUser.value;
 
       const jsonCreateUser = this.peticionesService.createUser(userData);
-      alert('!Enhorabuena, usuario creado!');
+      this.toastr.info('!Enhorabuena, usuario creado!');
+
       this.formUser.reset();
     } catch (error) {
       console.log(error);
@@ -96,7 +90,7 @@ export class FormsComponent implements OnInit {
       const jsonCreateOrganization = this.peticionesService.createOrganization(
         orgData
       );
-      alert('!Enhorabuena, organización creada!');
+      this.toastr.info('!Enhorabuena, organización creada!');
 
       this.formOrg.reset();
     } catch (error) {

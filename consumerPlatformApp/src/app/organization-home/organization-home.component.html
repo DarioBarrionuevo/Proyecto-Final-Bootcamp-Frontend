@@ -46,13 +46,13 @@
         <td>{{ order?.basket.format }}</td>
         <td>{{ order?.basket.content }}</td>
         <td>{{ order?.basket.price }} €</td>
-        <td>{{ order?.paid }}</td>
+        <td style="cursor:pointer" tooltip="Cambiar estado" placement="top">{{ order?.paid }}</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<!-- PUNTOS DE ENTREGA  //TODOhacerlo con el maps -->
+<!-- DELIVERY POINTS -->
 <div class="container marginBottomForFooter" *ngIf="section === 'deliveryPoints'">
 
   <!-- ADD -->
@@ -76,7 +76,6 @@
   <!-- SHOW -->
   <div class="container">
     <div class="card mb-3 grey" *ngFor="let point of deliveryPointsData;let index = index;">
-      <!-- <img src="../../assets/img/delivery.jpg" class="card-img-top" /> -->
       <div class="card-body">
         <h3 class="card-title">Direccion de entrega</h3>
         <p class="card-text">
@@ -88,7 +87,7 @@
   </div>
 </div>
 
-<!-- CREAR CESTAS  lista de las que hay y añadir-->
+<!-- CREATE BASKET-->
 <div class="container col-11 marginBottomForFooter" *ngIf="section === 'baskets'">
 
   <!-- ADD BASKET -->
@@ -156,7 +155,7 @@
       <tbody>
         <!-- ARRAY -->
         <tr *ngFor="let basket of basketsData">
-          <td>{{ basket?.active }}</td>
+          <td style="cursor:pointer" tooltip="Cambiar estado" placement="top">{{ basket?.active }}</td>
           <td>{{ basket?.format }}</td>
           <td>{{ basket?.content }}</td>
           <td>{{ basket?.creation_date }}</td>

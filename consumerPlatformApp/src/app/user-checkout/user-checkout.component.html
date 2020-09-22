@@ -1,5 +1,4 @@
 <div class="container grey borderXwidth col-8">
-  <!-- <a>CONFIRMACION DE PEDIDO</a> -->
   <a (click)="goBack()">VOLVER ATRAS</a>
   <a data-section="baskets" (click)="loadSection($event)">VER CESTAS</a>
 
@@ -28,9 +27,7 @@
           <th>FECHA DE CREACION</th>
           <th>PRECIO</th>
           <th>STOCK</th>
-          <!-- <th>CANTIDAD</th>
-          <th>TOTAL</th> -->
-          <!-- <th>COMPROBANTE</th>-->
+
 
 
         </tr>
@@ -44,13 +41,6 @@
           <td>{{ basket?.creation_date }}</td>
           <td>{{ basket?.price }} €</td>
           <td>{{ basket?.stock }}</td>
-
-
-
-          <!-- <td><button (click)="
-              chooseBasket(i)">ELEGIR</button>
-          </td> -->
-          <!--paso el indice para saber que elemento del array de basket data es el que he elegido -->
 
         </tr>
       </tbody>
@@ -87,12 +77,6 @@
 
     </form>
 
-
-
-
   </div>
-
-
-
 
 </div>

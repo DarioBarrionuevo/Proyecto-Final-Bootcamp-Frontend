@@ -21,13 +21,13 @@ export class UserCheckoutComponent implements OnInit {
   id = JSON.parse(sessionStorage.getItem('_id'));
   // Table
   dtOptions: any;
-  // baskets data
+  // Baskets data
   basketsData: any[];
   // ngIf
   section: string;
   // Checkout  form
   formCheckout: FormGroup;
-  // create order
+  // Create order
   orderData: any;
   // Organization data
   organizationData: any;
@@ -65,23 +65,23 @@ export class UserCheckoutComponent implements OnInit {
         this.deliveryPointInfo = params.deliveryPoint;
         this.organizationId = params.idOrg;
         this.organizationName = params.orgName;
-        // parmas.id o params.idorg
+        // parmas.id or params.idorg
       });
 
-      // Traer array de baskets activas
+      // Bring active baskets data
       const jsonBasketsDataByOrg = await this.peticionesService.getBasketsActiveByOrganization(
         this.organizationId
       );
       this.basketsData = jsonBasketsDataByOrg.basketInfo;
 
-      // traer info de user
+      // Bring info user
 
       const jsonUserDataFromBBDD = await this.peticionesService.getOneUser(
         this.id
       );
       this.jsonUserData = jsonUserDataFromBBDD.UserInfo[0];
 
-      // traer info de organizacion
+      // Bring info organization
       const jsonOrgData = await this.peticionesService.getOneOrganizationData(
         this.organizationId
       );
@@ -97,7 +97,7 @@ export class UserCheckoutComponent implements OnInit {
     sessionStorage.clear();
   }
   goBack(): void {
-    this.router.navigate([`/userHome`, this.id]); // le paso el segundo parametro que es la id de la organizacion
+    this.router.navigate([`/userHome`, this.id]); // Second param is the organization id
   }
   loadSection($event): void {
     this.section = $event.target.dataset.section;
@@ -105,10 +105,9 @@ export class UserCheckoutComponent implements OnInit {
 
   async checkout(): Promise<any> {
     try {
-      // crear el objeto con toda la informacion para mandar por correo
+      // Create object with info
       const checkoutData = this.formCheckout.value;
-      console.log('UserCheckoutComponent -> checkoutData', checkoutData);
-      // Crear la order
+      // Create order
 
       this.orderData._id = this.id;
       this.orderData.organization = this.organizationId;
@@ -120,7 +119,7 @@ export class UserCheckoutComponent implements OnInit {
       const jsonCreateORder = await this.peticionesService.createOrder(
         this.orderData
       );
-      // seguir con el objeto
+      // Keep with the object
       checkoutData.deliveryPoint = this.deliveryPointInfo;
       checkoutData.name = this.jsonUserData.name;
       checkoutData.surname1 = this.jsonUserData.surname1;
@@ -130,9 +129,9 @@ export class UserCheckoutComponent implements OnInit {
       checkoutData.basket = this.basketsData[checkoutData.numberOfBasket - 1];
       checkoutData.organization_email = this.organizationEmail;
       checkoutData.organization_name = this.organizationName;
-      console.log('UserCheckoutComponent -> checkoutData', checkoutData);
+      // console.log('UserCheckoutComponent -> checkoutData', checkoutData);
 
-      // sending email
+      // Sending email
       const jsonSendEmail = await this.peticionesService.sendEmail(
         checkoutData
       );

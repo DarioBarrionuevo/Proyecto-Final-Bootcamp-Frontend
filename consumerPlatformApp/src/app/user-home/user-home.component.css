@@ -94,13 +94,13 @@ div.borderXwidth a:hover:after {
   width: 100%;
 }
 
-/* estilos cards */
+/* CARDS STYLES*/
 
 .card {
   color: black;
 }
 
-/* estilos datatable */
+/* DATATABLE STYLES */
 .containerOrders {
   background-color: white;
 }
@@ -110,18 +110,20 @@ img {
   height: 250px;
 }
 
-/* estilos card  */
-.deliveryPoint {
-  /* height: 18rem; */
+/* CARDS STYLES*/
+
+.card {
+  color: black;
 }
 
-.deliveryPoint > img {
+
+.deliveryPoint>img {
   height: 10rem;
 }
-/* estilos map */
+
+/* MAP STYLES */
+
 agm-map {
-  /* width: 10rem;
-  height: 10rem; */
   width: 100%;
   height: 250px;
 }
