@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "proyecto-final-bootcamp-frontend",
+=======
+  "name": "ProyectoFinalBootcampFrontend",
+>>>>>>> 65527f54de236715e5a28bd1a73849a646af8e69
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +12,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+<<<<<<< HEAD
     "deploy": "ng build --prod --base-href=/proyecto-final-bootcamp-frontend/"
+=======
+    "deploy": "ng build --prod --base-href=/ProyectoFinalBootcampFrontend/"
+>>>>>>> 65527f54de236715e5a28bd1a73849a646af8e69
   },
   "private": true,
   "dependencies": {
