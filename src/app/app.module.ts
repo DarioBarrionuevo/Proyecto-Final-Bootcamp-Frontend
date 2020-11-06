@@ -42,7 +42,10 @@ import { LoginOrganizationComponent } from './login-organization/login-organizat
     HttpClientModule,
     DataTablesModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBP4AqgTC6EPZ8HMKMgmvUOxKlkHgigB54',
+      // apiKey: 'AIzaSyBP4AqgTC6EPZ8HMKMgmvUOxKlkHgigB54',
+      apiKey: 'AIzaSyAmWDmHO2r_5re3g0qjlLYphntzazRbZZw',
+
+      
     }),
     BrowserAnimationsModule,
     ToastrModule.forRoot({

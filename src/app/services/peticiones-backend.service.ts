@@ -261,7 +261,7 @@ export class PeticionesBackendService {
   getCoordinates(pStreetName): Promise<any> {
     return this.httpClient
       .get<any>(
-        `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBP4AqgTC6EPZ8HMKMgmvUOxKlkHgigB54&address=${pStreetName}`
+        `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAmWDmHO2r_5re3g0qjlLYphntzazRbZZw&address=${pStreetName}`
       )
       .toPromise();
   }
